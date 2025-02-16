@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bot, Cpu, Github, Linkedin, Mail, CircuitBoard, GraduationCap, Briefcase, Home, Trophy, Award, BadgeCheck, Star } from "lucide-react";
+import { 
+  Bot, Cpu, Github, Linkedin, Mail, CircuitBoard, GraduationCap, 
+  Briefcase, Home, Trophy, Award, BadgeCheck, Star, Code, 
+  Settings, Terminal, Database, Tool, Brain, Cog
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -84,6 +88,132 @@ const Index = () => {
         </div>
         <div className="absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-b from-background to-background/5" />
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section className="py-20 neo-blur">
+        <div className="container px-4 mx-auto">
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="max-w-3xl mx-auto text-center mb-16"
+          >
+            <h2 className="text-3xl font-bold mb-4 text-gradient">Technical Skills</h2>
+            <p className="text-muted-foreground">
+              Comprehensive expertise in robotics, programming, and automation
+            </p>
+          </motion.div>
+
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+          >
+            {[
+              {
+                title: "Robotics",
+                icon: <Bot className="w-6 h-6" />,
+                skills: [
+                  "ROS2 Development",
+                  "Robot Kinematics",
+                  "Path Planning",
+                  "SLAM",
+                  "Computer Vision",
+                  "Motion Control"
+                ]
+              },
+              {
+                title: "Programming",
+                icon: <Code className="w-6 h-6" />,
+                skills: [
+                  "Python",
+                  "C++",
+                  "JavaScript/TypeScript",
+                  "MATLAB",
+                  "Git Version Control",
+                  "SQL"
+                ]
+              },
+              {
+                title: "Modelling",
+                icon: <CircuitBoard className="w-6 h-6" />,
+                skills: [
+                  "SolidWorks",
+                  "Fusion 360",
+                  "3D Modeling",
+                  "FEA Analysis",
+                  "CAD/CAM",
+                  "Technical Drawing"
+                ]
+              },
+              {
+                title: "Electronics",
+                icon: <Cpu className="w-6 h-6" />,
+                skills: [
+                  "Embedded Systems",
+                  "Arduino",
+                  "Raspberry Pi",
+                  "PCB Design",
+                  "Sensors Integration",
+                  "Circuit Design"
+                ]
+              },
+              {
+                title: "Analysis",
+                icon: <Brain className="w-6 h-6" />,
+                skills: [
+                  "Data Analysis",
+                  "System Optimization",
+                  "Performance Metrics",
+                  "Quality Control",
+                  "Process Analysis",
+                  "Statistical Analysis"
+                ]
+              },
+              {
+                title: "Automation",
+                icon: <Cog className="w-6 h-6" />,
+                skills: [
+                  "PLC Programming",
+                  "Industrial Automation",
+                  "Process Control",
+                  "SCADA Systems",
+                  "Industry 4.0",
+                  "IoT Integration"
+                ]
+              }
+            ].map((category, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                transition={{ duration: 0.8 }}
+              >
+                <Card className="p-6 h-full glass hover:bg-white/5 transition-colors duration-300">
+                  <div className="flex flex-col h-full">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="p-2 glass rounded-lg">
+                        {category.icon}
+                      </div>
+                      <h3 className="text-xl font-semibold">{category.title}</h3>
+                    </div>
+                    <ul className="space-y-2 text-muted-foreground">
+                      {category.skills.map((skill, skillIndex) => (
+                        <li key={skillIndex} className="flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary/60" />
+                          {skill}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
@@ -294,7 +424,7 @@ const Index = () => {
           >
             {[
               {
-                school: "KLE TECHNOLOGICAL UNIVERSITY, HUBBALI",
+                school: "KLE TECHNOLOGICAL UNIVERSITY, HUBBALLI",
                 degree: "B.E. in Automation & Robotics (GPA: 8.52)",
                 period: "12/2021 - PRESENT"
               },
