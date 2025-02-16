@@ -1,7 +1,6 @@
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bot, Cpu, Github, Linkedin, Mail, CircuitBoard, GraduationCap, Briefcase, Home } from "lucide-react";
+import { Bot, Cpu, Github, Linkedin, Mail, CircuitBoard, GraduationCap, Briefcase, Home, Trophy, Award, BadgeCheck, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -125,6 +124,85 @@ const Index = () => {
                 </ul>
               </Card>
             </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Certifications & Achievements Section */}
+      <section className="py-20 neo-blur">
+        <div className="container px-4 mx-auto">
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="max-w-3xl mx-auto text-center mb-16"
+          >
+            <h2 className="text-3xl font-bold mb-4 text-gradient">Certifications & Achievements</h2>
+            <p className="text-muted-foreground">
+              Recognition and accomplishments in robotics and automation
+            </p>
+          </motion.div>
+
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+          >
+            {[
+              {
+                title: "Robotics & Industry 4.0",
+                issuer: "Coursera",
+                date: "2023",
+                description: "Advanced certification in modern robotics and Industry 4.0 technologies",
+                icon: "trophy"
+              },
+              {
+                title: "Best Project Award",
+                issuer: "KLE Technological University",
+                date: "2023",
+                description: "Recognition for outstanding project in robotics and automation",
+                icon: "award"
+              },
+              {
+                title: "ROS 2 Development",
+                issuer: "The Construct",
+                date: "2023",
+                description: "Professional certification in ROS 2 development and implementation",
+                icon: "badge-check"
+              },
+              {
+                title: "Technical Excellence",
+                issuer: "VEGAM Solutions",
+                date: "2023",
+                description: "Recognition for technical contributions and innovative solutions",
+                icon: "star"
+              }
+            ].map((achievement, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                transition={{ duration: 0.8 }}
+              >
+                <Card className="p-6 h-full glass hover:bg-white/5 transition-colors duration-300">
+                  <div className="flex items-start gap-4">
+                    <div className="p-2 glass rounded-lg">
+                      {achievement.icon === "trophy" && <Trophy className="w-6 h-6" />}
+                      {achievement.icon === "award" && <Award className="w-6 h-6" />}
+                      {achievement.icon === "badge-check" && <BadgeCheck className="w-6 h-6" />}
+                      {achievement.icon === "star" && <Star className="w-6 h-6" />}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold mb-1">{achievement.title}</h3>
+                      <p className="text-sm text-muted-foreground mb-2">{achievement.issuer} • {achievement.date}</p>
+                      <p className="text-muted-foreground text-sm">{achievement.description}</p>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
