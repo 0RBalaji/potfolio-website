@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Bot, Cpu, Cog, Github, Linkedin, Mail, CircuitBoard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -18,22 +18,38 @@ const Index = () => {
     navigator.clipboard.writeText("your.email@example.com");
   };
 
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 },
+  };
+
+  const staggerContainer = {
+    animate: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
   return (
-    <div className="min-h-screen w-full overflow-hidden">
+    <div className="min-h-screen w-full overflow-hidden bg-gradient-to-b from-background via-background/95 to-background/90">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="container px-4 mx-auto text-center z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={fadeInUp}
             transition={{ duration: 0.8 }}
             className="space-y-4"
           >
-            <div className="inline-flex items-center space-x-2 bg-secondary/80 px-3 py-1 rounded-full mb-4">
+            <div className="inline-flex items-center space-x-2 glass px-3 py-1 rounded-full mb-4">
               <Bot className="w-4 h-4" />
               <span className="text-sm font-medium">Robotics Engineer</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gradient">
               Creating the Future of
               <br />
               <span className="text-primary">Robotics Engineering</span>
@@ -41,18 +57,29 @@ const Index = () => {
             <p className="text-muted-foreground max-w-[600px] mx-auto text-lg">
               Transforming complex engineering challenges into elegant robotic solutions
             </p>
-            <div className="flex items-center justify-center gap-4 pt-4">
-              <Button
-                onClick={handleContactClick}
-                className="rounded-full"
-                size="lg"
-              >
-                Get in Touch
-              </Button>
-              <Button variant="outline" className="rounded-full" size="lg">
-                View Projects
-              </Button>
-            </div>
+            <motion.div 
+              className="flex items-center justify-center gap-4 pt-4"
+              variants={staggerContainer}
+            >
+              <motion.div variants={fadeInUp}>
+                <Button
+                  onClick={handleContactClick}
+                  className="rounded-full glass hover:bg-white/10 transition-colors duration-300"
+                  size="lg"
+                >
+                  Get in Touch
+                </Button>
+              </motion.div>
+              <motion.div variants={fadeInUp}>
+                <Button 
+                  variant="outline" 
+                  className="rounded-full glass hover:bg-white/10 transition-colors duration-300" 
+                  size="lg"
+                >
+                  View Projects
+                </Button>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
         <div className="absolute inset-0 -z-10">
@@ -64,19 +91,26 @@ const Index = () => {
       <section className="py-20">
         <div className="container px-4 mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeInUp}
             className="max-w-3xl mx-auto text-center mb-16"
           >
-            <h2 className="text-3xl font-bold mb-4">About Me</h2>
+            <h2 className="text-3xl font-bold mb-4 text-gradient">About Me</h2>
             <p className="text-muted-foreground">
               As a Robotics Engineer, I specialize in designing and implementing cutting-edge robotic systems 
               that bridge the gap between mechanical engineering and artificial intelligence.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+          >
             {[
               {
                 icon: Bot,
@@ -96,12 +130,11 @@ const Index = () => {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                variants={fadeInUp}
+                transition={{ duration: 0.8 }}
               >
-                <Card className="p-6 text-center h-full hover:shadow-lg transition-shadow">
-                  <div className="mb-4 inline-flex p-3 bg-secondary rounded-lg">
+                <Card className="p-6 text-center h-full neo-blur hover:bg-white/5 transition-colors duration-300">
+                  <div className="mb-4 inline-flex p-3 glass rounded-lg">
                     <item.icon className="w-6 h-6" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
@@ -109,34 +142,40 @@ const Index = () => {
                 </Card>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Projects Section */}
-      <section className="py-20 bg-secondary/50">
+      <section className="py-20 neo-blur">
         <div className="container px-4 mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeInUp}
             className="max-w-3xl mx-auto text-center mb-16"
           >
-            <h2 className="text-3xl font-bold mb-4">Featured Projects</h2>
+            <h2 className="text-3xl font-bold mb-4 text-gradient">Featured Projects</h2>
             <p className="text-muted-foreground">
               Explore some of my recent work in robotics and automation
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+          >
             {[1, 2].map((_, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                variants={fadeInUp}
+                transition={{ duration: 0.8 }}
               >
-                <Card className="overflow-hidden">
+                <Card className="overflow-hidden glass hover:bg-white/5 transition-colors duration-300">
                   <div className="aspect-video bg-muted" />
                   <div className="p-6">
                     <h3 className="text-xl font-semibold mb-2">Project Title</h3>
@@ -144,10 +183,10 @@ const Index = () => {
                       Brief description of the project and its impact
                     </p>
                     <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" className="glass hover:bg-white/10">
                         View Details
                       </Button>
-                      <Button variant="ghost" size="sm">
+                      <Button variant="ghost" size="sm" className="hover:bg-white/10">
                         <Github className="w-4 h-4" />
                       </Button>
                     </div>
@@ -155,7 +194,7 @@ const Index = () => {
                 </Card>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -163,44 +202,50 @@ const Index = () => {
       <section className="py-20">
         <div className="container px-4 mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeInUp}
             className="max-w-3xl mx-auto text-center"
           >
-            <h2 className="text-3xl font-bold mb-4">Let's Connect</h2>
+            <h2 className="text-3xl font-bold mb-4 text-gradient">Let's Connect</h2>
             <p className="text-muted-foreground mb-8">
               Interested in collaboration? Let's discuss your project
             </p>
-            <div className="flex justify-center gap-4">
-              <Button
-                variant="outline"
-                size="lg"
-                className="rounded-full"
-                onClick={() => window.open("https://github.com", "_blank")}
-              >
-                <Github className="w-5 h-5 mr-2" />
-                GitHub
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="rounded-full"
-                onClick={() => window.open("https://linkedin.com", "_blank")}
-              >
-                <Linkedin className="w-5 h-5 mr-2" />
-                LinkedIn
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="rounded-full"
-                onClick={handleContactClick}
-              >
-                <Mail className="w-5 h-5 mr-2" />
-                Email
-              </Button>
-            </div>
+            <motion.div 
+              className="flex justify-center gap-4"
+              variants={staggerContainer}
+            >
+              {[
+                {
+                  icon: Github,
+                  label: "GitHub",
+                  onClick: () => window.open("https://github.com", "_blank"),
+                },
+                {
+                  icon: Linkedin,
+                  label: "LinkedIn",
+                  onClick: () => window.open("https://linkedin.com", "_blank"),
+                },
+                {
+                  icon: Mail,
+                  label: "Email",
+                  onClick: handleContactClick,
+                },
+              ].map((item, index) => (
+                <motion.div key={index} variants={fadeInUp}>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="rounded-full glass hover:bg-white/10 transition-colors duration-300"
+                    onClick={item.onClick}
+                  >
+                    <item.icon className="w-5 h-5 mr-2" />
+                    {item.label}
+                  </Button>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
       </section>
