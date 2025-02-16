@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Chip, Circuit, Cog, Github, Linkedin, Mail, Robot } from "lucide-react";
+import { Bot, Cpu, Cog, Github, Linkedin, Mail, CircuitBoard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -30,7 +30,7 @@ const Index = () => {
             className="space-y-4"
           >
             <div className="inline-flex items-center space-x-2 bg-secondary/80 px-3 py-1 rounded-full mb-4">
-              <Robot className="w-4 h-4" />
+              <Bot className="w-4 h-4" />
               <span className="text-sm font-medium">Robotics Engineer</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
@@ -79,17 +79,17 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
-                icon: Robot,
+                icon: Bot,
                 title: "Robotics Design",
                 description: "Creating innovative robotic solutions for complex challenges",
               },
               {
-                icon: Circuit,
+                icon: CircuitBoard,
                 title: "Control Systems",
                 description: "Developing precise control mechanisms for optimal performance",
               },
               {
-                icon: Chip,
+                icon: Cpu,
                 title: "AI Integration",
                 description: "Implementing machine learning for intelligent automation",
               },
