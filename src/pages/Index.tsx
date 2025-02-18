@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, useAnimation, useScroll, useTransform } from "framer-motion";
 import { 
   Bot, Cpu, Github, Linkedin, Mail, CircuitBoard, GraduationCap, 
   Briefcase, Home, Trophy, Award, BadgeCheck, Star, Code, 
@@ -13,6 +13,11 @@ import { useToast } from "@/hooks/use-toast";
 const Index = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const { toast } = useToast();
+  const controls = useAnimation();
+  const { scrollY } = useScroll();
+  
+  const y = useTransform(scrollY, [0, 1000], [0, -200]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   const handleContactClick = () => {
     toast({
@@ -21,6 +26,110 @@ const Index = () => {
     });
     navigator.clipboard.writeText("rajalbandi2balaji@gmail.com");
   };
+
+  const animatedIcons = [
+    { Icon: CircuitBoard, size: "w-24 h-24", position: "bottom-1/4 left-1/3" },
+    { Icon: Cpu, size: "w-32 h-32", position: "top-1/3 left-1/3" },
+    { Icon: Settings, size: "w-40 h-40", position: "top-1/2 right-1/3" },
+    { Icon: Terminal, size: "w-28 h-28", position: "bottom-1/3 right-1/4" },
+    { Icon: Database, size: "w-36 h-36", position: "top-1/4 left-1/4" },
+    { Icon: Brain, size: "w-44 h-44", position: "bottom-1/2 right-1/2" }
+  ];
+
+  useEffect(() => {
+    const sequence = async () => {
+      await controls.start({
+        scale: [1, 1.2, 1],
+        rotate: [0, 360, 0],
+        transition: { duration: 2, repeat: Infinity }
+      });
+    };
+    sequence();
+  }, [controls]);
+
+  const floatingAnimation = {
+    initial: { y: 0 },
+    animate: {
+      y: [-20, 20, -20],
+      transition: {
+        duration: 6,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const rotatingAnimation = {
+    initial: { rotate: 0 },
+    animate: {
+      rotate: 360,
+      transition: {
+        duration: 20,
+        repeat: Infinity,
+        ease: "linear"
+      }
+    }
+  };
+
+  const pulsingAnimation = {
+    initial: { scale: 1, opacity: 0.5 },
+    animate: {
+      scale: [1, 1.2, 1],
+      opacity: [0.5, 0.8, 0.5],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const projects = [
+    {
+      title: "SWARM-SLAM: Understanding Unknown Environments",
+      brief: "Enhanced flexibility and adaptability of Multi-Robot Systems (MRS) using multiple AMRs for task automation.",
+      fullDescription: "Enhanced flexibility and adaptability of Multi-Robot Systems (MRS) on the shop floor by utilizing multiple AMRs for tasks product and raw material transport. The system leverages advanced SLAM techniques and the NAV2 stack for efficient navigation and mapping.",
+      tools: "ROS2 Framework, NAV2 stack, AMCL, Process Automation, Robotics, Python, LiDAR",
+      images: ["/placeholder.svg", "/placeholder.svg"],
+      links: [
+        { title: "GitHub Repository", url: "https://github.com/yourusername/swarm-slam" },
+        { title: "Documentation", url: "#" }
+      ]
+    },
+    {
+      title: "Cartesian Robot for Painting Application",
+      brief: "Automated painting process using computer vision for work-piece analysis and path planning.",
+      fullDescription: "A Cartesian robot designed to automate the painting process, using advanced computer vision algorithms for analyzing work-piece shape and selecting optimal paint paths. The system integrates multiple sensors and precise motion control.",
+      tools: "Python, Process Automation, Raspberry Pi, Circuit design, SolidWorks, Motion Study",
+      images: ["/placeholder.svg", "/placeholder.svg"],
+      links: [
+        { title: "Project Demo", url: "#" },
+        { title: "Technical Paper", url: "#" }
+      ]
+    },
+    {
+      title: "Extraterrestrial Rover",
+      brief: "Autonomous rover designed for extraterrestrial exploration and mapping missions.",
+      fullDescription: "An Extraterrestrial rover designed for autonomous missions, enabling local mapping and traversing techniques. Features advanced sensor fusion and autonomous navigation capabilities for unknown terrain.",
+      tools: "Robot system design, Robot programming, Sensor fusion, Circuit design, Jetson Nano",
+      images: ["/placeholder.svg", "/placeholder.svg"],
+      links: [
+        { title: "Project Overview", url: "#" },
+        { title: "Research Paper", url: "#" }
+      ]
+    },
+    {
+      title: "Home Automation - Garden System",
+      brief: "Smart garden maintenance system with automated watering based on environmental conditions.",
+      fullDescription: "A watering and maintaining garden robot based on soil moisture levels and environmental temperature. Implements IoT connectivity for remote monitoring and control of garden conditions.",
+      tools: "MATLAB, Simulink, SolidWorks, Motion study, FEA, Arduino, IoT, process automation",
+      images: ["/placeholder.svg", "/placeholder.svg"],
+      links: [
+        { title: "System Architecture", url: "#" },
+        { title: "Implementation Guide", url: "#" }
+      ]
+    }
+  ];
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -75,63 +184,59 @@ const Index = () => {
     }
   };
 
-  const projects = [
-    {
-      title: "SWARM-SLAM: Understanding Unknown Environments",
-      brief: "Enhanced flexibility and adaptability of Multi-Robot Systems (MRS) using multiple AMRs for task automation.",
-      fullDescription: "Enhanced flexibility and adaptability of Multi-Robot Systems (MRS) on the shop floor by utilizing multiple AMRs for tasks product and raw material transport. The system leverages advanced SLAM techniques and the NAV2 stack for efficient navigation and mapping.",
-      tools: "ROS2 Framework, NAV2 stack, AMCL, Process Automation, Robotics, Python, LiDAR",
-      images: ["/placeholder.svg", "/placeholder.svg"],
-      links: [
-        { title: "GitHub Repository", url: "https://github.com/yourusername/swarm-slam" },
-        { title: "Documentation", url: "#" }
-      ]
-    },
-    {
-      title: "Cartesian Robot for Painting Application",
-      brief: "Automated painting process using computer vision for work-piece analysis and path planning.",
-      fullDescription: "A Cartesian robot designed to automate the painting process, using advanced computer vision algorithms for analyzing work-piece shape and selecting optimal paint paths. The system integrates multiple sensors and precise motion control.",
-      tools: "Python, Process Automation, Raspberry Pi, Circuit design, SolidWorks, Motion Study",
-      images: ["/placeholder.svg", "/placeholder.svg"],
-      links: [
-        { title: "Project Demo", url: "#" },
-        { title: "Technical Paper", url: "#" }
-      ]
-    },
-    {
-      title: "Extraterrestrial Rover",
-      brief: "Autonomous rover designed for extraterrestrial exploration and mapping missions.",
-      fullDescription: "An Extraterrestrial rover designed for autonomous missions, enabling local mapping and traversing techniques. Features advanced sensor fusion and autonomous navigation capabilities for unknown terrain.",
-      tools: "Robot system design, Robot programming, Sensor fusion, Circuit design, Jetson Nano",
-      images: ["/placeholder.svg", "/placeholder.svg"],
-      links: [
-        { title: "Project Overview", url: "#" },
-        { title: "Research Paper", url: "#" }
-      ]
-    },
-    {
-      title: "Home Automation - Garden System",
-      brief: "Smart garden maintenance system with automated watering based on environmental conditions.",
-      fullDescription: "A watering and maintaining garden robot based on soil moisture levels and environmental temperature. Implements IoT connectivity for remote monitoring and control of garden conditions.",
-      tools: "MATLAB, Simulink, SolidWorks, Motion study, FEA, Arduino, IoT, process automation",
-      images: ["/placeholder.svg", "/placeholder.svg"],
-      links: [
-        { title: "System Architecture", url: "#" },
-        { title: "Implementation Guide", url: "#" }
-      ]
-    }
-  ];
-
   return (
     <div className="min-h-screen w-full overflow-hidden bg-gradient-to-b from-background via-background/95 to-background/90">
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
+        {/* Dynamic background elements */}
+        <motion.div 
+          className="absolute inset-0 overflow-hidden"
+          style={{ y, opacity }}
+        >
+          {/* Animated circles */}
+          {[...Array(3)].map((_, index) => (
+            <motion.div
+              key={`circle-${index}`}
+              className={`absolute ${index % 2 === 0 ? 'border-primary/30' : 'border-primary/20'} rounded-full border`}
+              style={{
+                width: `${(index + 2) * 100}px`,
+                height: `${(index + 2) * 100}px`,
+                left: `${30 + index * 10}%`,
+                top: `${20 + index * 15}%`
+              }}
+              variants={rotatingAnimation}
+              initial="initial"
+              animate="animate"
+              custom={index}
+            />
+          ))}
+
+          {/* Animated icons */}
+          {animatedIcons.map((item, index) => (
+            <motion.div
+              key={`icon-${index}`}
+              className={`absolute ${item.position} ${item.size}`}
+              variants={floatingAnimation}
+              initial="initial"
+              animate="animate"
+              whileHover={{
+                scale: 1.2,
+                rotate: 180,
+                transition: { duration: 0.3 }
+              }}
+            >
+              <item.Icon className="w-full h-full text-primary/40" />
+            </motion.div>
+          ))}
+
+          {/* Interactive particle effect */}
           <motion.div
-            className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full border border-primary/20"
+            className="absolute inset-0"
             animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 180, 360],
-              opacity: [0.3, 0.5, 0.3],
+              background: [
+                "radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 50%)",
+                "radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 50%)",
+                "radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 50%)"
+              ],
             }}
             transition={{
               duration: 8,
@@ -139,76 +244,25 @@ const Index = () => {
               ease: "linear"
             }}
           />
-          <motion.div
-            className="absolute top-1/3 right-1/4 w-48 h-48 rounded-full border border-primary/30"
-            animate={{
-              scale: [1.2, 1, 1.2],
-              rotate: [360, 180, 0],
-              opacity: [0.5, 0.3, 0.5],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-          <motion.div
-            className="absolute bottom-1/4 left-1/3 w-24 h-24"
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            <CircuitBoard className="w-full h-full text-primary/30" />
-          </motion.div>
-          <motion.div
-            className="absolute top-1/3 left-1/3 w-32 h-32"
-            animate={{
-              y: [0, 20, 0],
-              opacity: [0.4, 0.6, 0.4],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            <Cpu className="w-full h-full text-primary/40" />
-          </motion.div>
-          <motion.div
-            className="absolute top-1/2 right-1/3 w-40 h-40"
-            animate={{
-              rotate: [0, 360],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          >
-            <Settings className="w-full h-full text-primary/30" />
-          </motion.div>
-        </div>
+        </motion.div>
 
+        {/* Content section */}
         <div className="container px-4 mx-auto text-center z-10">
           <motion.div
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={fadeInUp}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="space-y-4"
           >
-            <div className="inline-flex items-center space-x-2 glass px-3 py-1 rounded-full mb-4">
+            <motion.div 
+              className="inline-flex items-center space-x-2 glass px-3 py-1 rounded-full mb-4"
+              variants={pulsingAnimation}
+              initial="initial"
+              animate="animate"
+            >
               <Bot className="w-4 h-4" />
               <span className="text-sm font-medium">Automation & Robotics Engineer</span>
-            </div>
+            </motion.div>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gradient">
               R Balaji
               <br />
@@ -220,9 +274,14 @@ const Index = () => {
             </p>
             <motion.div 
               className="flex items-center justify-center gap-4 pt-4"
-              variants={staggerContainer}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
             >
-              <motion.div variants={fadeInUp}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button
                   onClick={handleContactClick}
                   className="rounded-full glass hover:bg-white/10 transition-colors duration-300"
@@ -231,7 +290,10 @@ const Index = () => {
                   Get in Touch
                 </Button>
               </motion.div>
-              <motion.div variants={fadeInUp}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button 
                   variant="outline" 
                   className="rounded-full glass hover:bg-white/10 transition-colors duration-300" 
@@ -244,11 +306,9 @@ const Index = () => {
             </motion.div>
           </motion.div>
         </div>
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-b from-background to-background/5" />
-        </div>
       </section>
 
+      {/* Rest of the sections */}
       <section className="py-20 neo-blur">
         <div className="container px-4 mx-auto">
           <motion.div
