@@ -1,9 +1,10 @@
+
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Bot, Cpu, Github, Linkedin, Mail, CircuitBoard, GraduationCap, 
   Briefcase, Home, Trophy, Award, BadgeCheck, Star, Code, 
-  Settings, Terminal, Database, Tool, Brain, Cog
+  Settings, Terminal, Database, Brain, Cog
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
