@@ -36,6 +36,45 @@ const Index = () => {
     },
   };
 
+  const cardVariants = {
+    initial: { 
+      scale: 0.95,
+      opacity: 0 
+    },
+    animate: { 
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    },
+    hover: {
+      scale: 1.02,
+      transition: {
+        duration: 0.2
+      }
+    }
+  };
+
+  const backgroundVariants = {
+    initial: {
+      background: "linear-gradient(45deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 100%)"
+    },
+    animate: {
+      background: [
+        "linear-gradient(45deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 100%)",
+        "linear-gradient(225deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 100%)",
+        "linear-gradient(405deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 100%)",
+        "linear-gradient(45deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 100%)"
+      ],
+      transition: {
+        duration: 10,
+        repeat: Infinity,
+        repeatType: "reverse"
+      }
+    }
+  };
+
   const projects = [
     {
       title: "SWARM-SLAM: Understanding Unknown Environments",
@@ -366,19 +405,54 @@ const Index = () => {
             {projects.map((project, index) => (
               <motion.div
                 key={index}
-                variants={fadeInUp}
-                transition={{ duration: 0.8 }}
+                variants={cardVariants}
+                initial="initial"
+                whileInView="animate"
+                whileHover="hover"
+                viewport={{ once: true }}
+                className="relative h-full"
               >
+                <motion.div
+                  className="absolute inset-0 rounded-lg opacity-30"
+                  variants={backgroundVariants}
+                  initial="initial"
+                  animate="animate"
+                />
                 <Card 
-                  className="overflow-hidden glass hover:bg-white/5 transition-colors duration-300 cursor-pointer"
+                  className="relative overflow-hidden glass hover:bg-white/5 transition-colors duration-300 cursor-pointer backdrop-blur-sm h-full"
                   onClick={() => setSelectedProject(index)}
                 >
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                    <p className="text-muted-foreground mb-4">{project.brief}</p>
-                    <Button variant="outline" className="mt-4">
-                      View Details <ExternalLink className="ml-2 w-4 h-4" />
-                    </Button>
+                  <motion.div 
+                    className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/50 to-primary"
+                    animate={{
+                      scale: [1, 1.5, 1],
+                      opacity: [0.3, 0.5, 0.3],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      repeatType: "reverse"
+                    }}
+                  />
+                  <div className="p-6 relative z-10">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                      <p className="text-muted-foreground mb-4">{project.brief}</p>
+                      <Button variant="outline" className="mt-4 relative overflow-hidden group">
+                        <span className="relative z-10">View Details</span>
+                        <motion.div
+                          className="absolute inset-0 bg-primary/10"
+                          initial={{ x: "-100%" }}
+                          whileHover={{ x: "100%" }}
+                          transition={{ duration: 0.5 }}
+                        />
+                        <ExternalLink className="ml-2 w-4 h-4 relative z-10" />
+                      </Button>
+                    </motion.div>
                   </div>
                 </Card>
               </motion.div>
