@@ -3,13 +3,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   Bot, Cpu, Github, Linkedin, Mail, CircuitBoard, GraduationCap, 
   Briefcase, Home, Trophy, Award, BadgeCheck, Star, Code, 
-  Settings, Terminal, Database, Brain, Cog
+  Settings, Terminal, Database, Brain, Cog, ExternalLink
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
+  const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const { toast } = useToast();
 
   const handleContactClick = () => {
@@ -34,9 +36,55 @@ const Index = () => {
     },
   };
 
+  const projects = [
+    {
+      title: "SWARM-SLAM: Understanding Unknown Environments",
+      brief: "Enhanced flexibility and adaptability of Multi-Robot Systems (MRS) using multiple AMRs for task automation.",
+      fullDescription: "Enhanced flexibility and adaptability of Multi-Robot Systems (MRS) on the shop floor by utilizing multiple AMRs for tasks product and raw material transport. The system leverages advanced SLAM techniques and the NAV2 stack for efficient navigation and mapping.",
+      tools: "ROS2 Framework, NAV2 stack, AMCL, Process Automation, Robotics, Python, LiDAR",
+      images: ["/placeholder.svg", "/placeholder.svg"],
+      links: [
+        { title: "GitHub Repository", url: "https://github.com/yourusername/swarm-slam" },
+        { title: "Documentation", url: "#" }
+      ]
+    },
+    {
+      title: "Cartesian Robot for Painting Application",
+      brief: "Automated painting process using computer vision for work-piece analysis and path planning.",
+      fullDescription: "A Cartesian robot designed to automate the painting process, using advanced computer vision algorithms for analyzing work-piece shape and selecting optimal paint paths. The system integrates multiple sensors and precise motion control.",
+      tools: "Python, Process Automation, Raspberry Pi, Circuit design, SolidWorks, Motion Study",
+      images: ["/placeholder.svg", "/placeholder.svg"],
+      links: [
+        { title: "Project Demo", url: "#" },
+        { title: "Technical Paper", url: "#" }
+      ]
+    },
+    {
+      title: "Extraterrestrial Rover",
+      brief: "Autonomous rover designed for extraterrestrial exploration and mapping missions.",
+      fullDescription: "An Extraterrestrial rover designed for autonomous missions, enabling local mapping and traversing techniques. Features advanced sensor fusion and autonomous navigation capabilities for unknown terrain.",
+      tools: "Robot system design, Robot programming, Sensor fusion, Circuit design, Jetson Nano",
+      images: ["/placeholder.svg", "/placeholder.svg"],
+      links: [
+        { title: "Project Overview", url: "#" },
+        { title: "Research Paper", url: "#" }
+      ]
+    },
+    {
+      title: "Home Automation - Garden System",
+      brief: "Smart garden maintenance system with automated watering based on environmental conditions.",
+      fullDescription: "A watering and maintaining garden robot based on soil moisture levels and environmental temperature. Implements IoT connectivity for remote monitoring and control of garden conditions.",
+      tools: "MATLAB, Simulink, SolidWorks, Motion study, FEA, Arduino, IoT, process automation",
+      images: ["/placeholder.svg", "/placeholder.svg"],
+      links: [
+        { title: "System Architecture", url: "#" },
+        { title: "Implementation Guide", url: "#" }
+      ]
+    }
+  ];
+
   return (
     <div className="min-h-screen w-full overflow-hidden bg-gradient-to-b from-background via-background/95 to-background/90">
-      {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="container px-4 mx-auto text-center z-10">
           <motion.div
@@ -91,7 +139,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Skills Section */}
       <section className="py-20 neo-blur">
         <div className="container px-4 mx-auto">
           <motion.div
@@ -176,7 +223,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Experience Section */}
       <section className="py-20">
         <div className="container px-4 mx-auto">
           <motion.div
@@ -217,7 +263,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Certifications & Achievements Section */}
       <section className="py-20 neo-blur">
         <div className="container px-4 mx-auto">
           <motion.div
@@ -296,7 +341,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Projects Section */}
       <section className="py-20 neo-blur">
         <div className="container px-4 mx-auto">
           <motion.div
@@ -319,49 +363,92 @@ const Index = () => {
             whileInView="animate"
             viewport={{ once: true }}
           >
-            {[
-              {
-                title: "SWARM-SLAM: Understanding Unknown Environments",
-                description: "Enhanced flexibility and adaptability of Multi-Robot Systems (MRS) on the shop floor by utilizing multiple AMRs for tasks product and raw material transport.",
-                tools: "ROS2 Framework, NAV2 stack, AMCL, Process Automation, Robotics, Python, LiDAR"
-              },
-              {
-                title: "Cartesian Robot for Painting Application",
-                description: "A Cartesian robot to automate the painting process, using computer vision for analyzing work-piece shape and selecting paint paths.",
-                tools: "Python, Process Automation, Raspberry Pi, Circuit design, SolidWorks, Motion Study"
-              },
-              {
-                title: "Extraterrestrial Rover",
-                description: "An Extraterrestrial rover designed for autonomous missions, enabling local mapping and traversing techniques.",
-                tools: "Robot system design, Robot programming, Sensor fusion, Circuit design, Jetson Nano"
-              },
-              {
-                title: "Home Automation - Garden System",
-                description: "A watering and maintaining garden robot based on soil moisture levels and environmental temperature.",
-                tools: "MATLAB, Simulink, SolidWorks, Motion study, FEA, Arduino, IoT, process automation"
-              }
-            ].map((project, index) => (
+            {projects.map((project, index) => (
               <motion.div
                 key={index}
                 variants={fadeInUp}
                 transition={{ duration: 0.8 }}
               >
-                <Card className="overflow-hidden glass hover:bg-white/5 transition-colors duration-300">
+                <Card 
+                  className="overflow-hidden glass hover:bg-white/5 transition-colors duration-300 cursor-pointer"
+                  onClick={() => setSelectedProject(index)}
+                >
                   <div className="p-6">
                     <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                    <p className="text-muted-foreground mb-4">{project.description}</p>
-                    <div className="text-sm text-muted-foreground mt-4">
-                      <strong>Tools & Skills:</strong> {project.tools}
-                    </div>
+                    <p className="text-muted-foreground mb-4">{project.brief}</p>
+                    <Button variant="outline" className="mt-4">
+                      View Details <ExternalLink className="ml-2 w-4 h-4" />
+                    </Button>
                   </div>
                 </Card>
               </motion.div>
             ))}
           </motion.div>
+
+          <Dialog open={selectedProject !== null} onOpenChange={() => setSelectedProject(null)}>
+            {selectedProject !== null && (
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-bold mb-4">
+                    {projects[selectedProject].title}
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="space-y-6">
+                  <div className="grid grid-cols-2 gap-4">
+                    {projects[selectedProject].images.map((image, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: idx * 0.2 }}
+                        className="relative aspect-video rounded-lg overflow-hidden glass"
+                      >
+                        <img 
+                          src={image} 
+                          alt={`Project image ${idx + 1}`}
+                          className="object-cover w-full h-full"
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-4"
+                  >
+                    <DialogDescription className="text-lg leading-relaxed">
+                      {projects[selectedProject].fullDescription}
+                    </DialogDescription>
+                    
+                    <div className="mt-6">
+                      <h4 className="text-lg font-semibold mb-2">Tools & Technologies</h4>
+                      <p className="text-muted-foreground">
+                        {projects[selectedProject].tools}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-4 mt-6">
+                      {projects[selectedProject].links.map((link, idx) => (
+                        <Button
+                          key={idx}
+                          variant="outline"
+                          className="glass hover:bg-white/10"
+                          onClick={() => window.open(link.url, "_blank")}
+                        >
+                          {link.title}
+                          <ExternalLink className="ml-2 w-4 h-4" />
+                        </Button>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              </DialogContent>
+            )}
+          </Dialog>
         </div>
       </section>
 
-      {/* Education Section */}
       <section className="py-20">
         <div className="container px-4 mx-auto">
           <motion.div
@@ -417,7 +504,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section className="py-20">
         <div className="container px-4 mx-auto">
           <motion.div
