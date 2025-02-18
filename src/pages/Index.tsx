@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -108,113 +107,72 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-          >
-            {[
-              {
-                title: "Robotics",
-                icon: <Bot className="w-6 h-6" />,
-                skills: [
-                  "ROS2 Development",
-                  "Robot Kinematics",
-                  "Path Planning",
-                  "SLAM",
-                  "Computer Vision",
-                  "Motion Control"
-                ]
-              },
-              {
-                title: "Programming",
-                icon: <Code className="w-6 h-6" />,
-                skills: [
-                  "Python",
-                  "C++",
-                  "JavaScript/TypeScript",
-                  "MATLAB",
-                  "Git Version Control",
-                  "SQL"
-                ]
-              },
-              {
-                title: "Modelling",
-                icon: <CircuitBoard className="w-6 h-6" />,
-                skills: [
-                  "SolidWorks",
-                  "Fusion 360",
-                  "3D Modeling",
-                  "FEA Analysis",
-                  "CAD/CAM",
-                  "Technical Drawing"
-                ]
-              },
-              {
-                title: "Electronics",
-                icon: <Cpu className="w-6 h-6" />,
-                skills: [
-                  "Embedded Systems",
-                  "Arduino",
-                  "Raspberry Pi",
-                  "PCB Design",
-                  "Sensors Integration",
-                  "Circuit Design"
-                ]
-              },
-              {
-                title: "Analysis",
-                icon: <Brain className="w-6 h-6" />,
-                skills: [
-                  "Data Analysis",
-                  "System Optimization",
-                  "Performance Metrics",
-                  "Quality Control",
-                  "Process Analysis",
-                  "Statistical Analysis"
-                ]
-              },
-              {
-                title: "Automation",
-                icon: <Cog className="w-6 h-6" />,
-                skills: [
-                  "PLC Programming",
-                  "Industrial Automation",
-                  "Process Control",
-                  "SCADA Systems",
-                  "Industry 4.0",
-                  "IoT Integration"
-                ]
-              }
-            ].map((category, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                transition={{ duration: 0.8 }}
-              >
-                <Card className="p-6 h-full glass hover:bg-white/5 transition-colors duration-300">
-                  <div className="flex flex-col h-full">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="p-2 glass rounded-lg">
-                        {category.icon}
-                      </div>
-                      <h3 className="text-xl font-semibold">{category.title}</h3>
-                    </div>
-                    <ul className="space-y-2 text-muted-foreground">
-                      {category.skills.map((skill, skillIndex) => (
-                        <li key={skillIndex} className="flex items-center gap-2">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary/60" />
-                          {skill}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
+          {[
+            {
+              title: "Robotics",
+              icon: <Bot className="w-10 h-10" />,
+              skills: ["ROS2", "SLAM", "Path Planning", "Computer Vision", "Motion Control", "Kinematics"]
+            },
+            {
+              title: "Programming",
+              icon: <Code className="w-10 h-10" />,
+              skills: ["Python", "C++", "JavaScript", "MATLAB", "Git", "SQL"]
+            },
+            {
+              title: "Modelling",
+              icon: <CircuitBoard className="w-10 h-10" />,
+              skills: ["SolidWorks", "Fusion 360", "3D Modeling", "FEA", "CAD/CAM", "Technical Drawing"]
+            },
+            {
+              title: "Electronics",
+              icon: <Cpu className="w-10 h-10" />,
+              skills: ["Arduino", "Raspberry Pi", "PCB Design", "Sensors", "Circuits", "Embedded Systems"]
+            },
+            {
+              title: "Analysis",
+              icon: <Brain className="w-10 h-10" />,
+              skills: ["Data Analysis", "Optimization", "Quality Control", "Process Analysis", "Statistics", "Metrics"]
+            },
+            {
+              title: "Automation",
+              icon: <Cog className="w-10 h-10" />,
+              skills: ["PLC", "Industrial", "SCADA", "Industry 4.0", "IoT", "Process Control"]
+            }
+          ].map((category, index) => (
+            <motion.div
+              key={index}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="mb-16"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-3 glass rounded-xl">
+                  {category.icon}
+                </div>
+                <h3 className="text-2xl font-bold text-gradient">{category.title}</h3>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.div
+                    key={skillIndex}
+                    variants={{
+                      initial: { opacity: 0, y: 20 },
+                      animate: { 
+                        opacity: 1, 
+                        y: 0,
+                        transition: { delay: skillIndex * 0.1 }
+                      }
+                    }}
+                    className="glass px-4 py-2 rounded-lg hover:bg-white/10 transition-colors duration-300"
+                  >
+                    <span className="text-sm font-medium">{skill}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
