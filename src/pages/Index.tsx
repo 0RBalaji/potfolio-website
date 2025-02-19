@@ -1,3 +1,4 @@
+<lov-code>
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -19,6 +20,7 @@ import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [selectedCollaboration, setSelectedCollaboration] = useState<number | null>(null);
   const { toast } = useToast();
 
   const handleContactClick = () => {
@@ -219,6 +221,33 @@ const Index = () => {
       images: ["/path.png", "/slam.png"],
       tools: "List of tools and technologies used in project 2",
       links: [{ title: "Live Demo", url: "https://example.com" }]
+    }
+  ];
+
+  const collaborationProjects = [
+    {
+      title: "Industrial Automation System",
+      brief: "Collaborative project with leading manufacturing company to implement smart factory solutions",
+      fullDescription: "Worked closely with industry partners to develop and implement an advanced automation system that improved production efficiency by 40%. The project involved integrating IoT sensors, developing real-time monitoring systems, and implementing predictive maintenance algorithms.",
+      images: [
+        "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
+        "https://images.unsplash.com/photo-1519389950473-47ba0277781c"
+      ],
+      tools: "ROS2, Python, C++, PLC Programming, SCADA, Industrial IoT",
+      partner: "Manufacturing Solutions Corp.",
+      links: [{ title: "Case Study", url: "https://example.com/case-study" }]
+    },
+    {
+      title: "Robotics Process Optimization",
+      brief: "Joint research project focusing on optimizing industrial robot movements",
+      fullDescription: "Collaborated with robotics industry leaders to develop innovative solutions for optimizing industrial robot movements, resulting in 25% improved efficiency. The project combined advanced path planning algorithms with real-time sensor feedback.",
+      images: [
+        "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
+        "https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
+      ],
+      tools: "ROS2, Machine Learning, Computer Vision, Motion Planning",
+      partner: "RoboTech Industries",
+      links: [{ title: "Project Overview", url: "https://example.com/overview" }]
     }
   ];
 
@@ -595,141 +624,27 @@ const Index = () => {
 
       <section className="py-20 neo-blur">
         <div className="container px-4 mx-auto">
-          <motion.div initial="initial" whileInView="animate" viewport={{
-          once: true
-        }} variants={fadeInUp} className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-gradient">Software & Tools</h2>
+          <motion.div 
+            initial="initial" 
+            whileInView="animate" 
+            viewport={{ once: true }} 
+            variants={fadeInUp} 
+            className="max-w-3xl mx-auto text-center mb-16"
+          >
+            <h2 className="text-3xl font-bold mb-4 text-gradient">Industry Collaborations</h2>
             <p className="text-muted-foreground">
-              Proficient in industry-standard software and development tools
+              Partnerships and projects with leading industry organizations
             </p>
           </motion.div>
 
-          <div className="space-y-12">
-            {softwareTools.map((section, sectionIndex) => (
-              <motion.div
-                key={sectionIndex}
-                initial="initial"
-                whileInView="animate"
-                viewport={{ once: true }}
-                variants={fadeInUp}
-                className="space-y-6"
-              >
-                <div className="flex items-center gap-3">
-                  <Tools className="w-6 h-6 text-primary" />
-                  <h3 className="text-xl font-semibold text-gradient">{section.category}</h3>
-                </div>
-                <motion.div 
-                  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6"
-                  variants={{
-                    animate: {
-                      transition: {
-                        staggerChildren: 0.1
-                      }
-                    }
-                  }}
-                >
-                  {section.tools.map((tool, toolIndex) => (
-                    <motion.div
-                      key={toolIndex}
-                      variants={{
-                        initial: { opacity: 0, y: 20 },
-                        animate: { opacity: 1, y: 0 }
-                      }}
-                      whileHover={{ scale: 1.05 }}
-                      className="glass p-4 rounded-xl flex flex-col items-center justify-center aspect-square hover:bg-white/10 transition-colors duration-300"
-                    >
-                      <img
-                        src={tool.image}
-                        alt={tool.name}
-                        className="w-12 h-12 object-contain mb-2"
-                        title={tool.name}
-                      />
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20">
-        <div className="container px-4 mx-auto">
-          <motion.div initial="initial" whileInView="animate" viewport={{
-          once: true
-        }} variants={fadeInUp} className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-gradient">Education</h2>
-          </motion.div>
-
-          <motion.div className="grid grid-cols-1 gap-8 max-w-3xl mx-auto" variants={staggerContainer} initial="initial" whileInView="animate" viewport={{
-          once: true
-        }}>
-            {[{
-              school: "KLE TECHNOLOGICAL UNIVERSITY, HUBBALLI",
-              degree: "B.E. in Automation & Robotics (GPA: 8.52)",
-              period: "12/2021 - PRESENT"
-            }, {
-              school: "ALVAS PU COLLEGE, VIDYAGIRI",
-              degree: "PCME – DISTINCTION – 94.66%",
-              period: "04/2020 - 07/2021"
-            }, {
-              school: "RACE CONCEPT SCHOOL, RAICHUR",
-              degree: "DISTINCTION - 85.5%",
-              period: "05/2018 - 04/2019"
-            }].map((edu, index) => (
-              <motion.div key={index} variants={fadeInUp}>
-                <Card className="p-6 glass hover:bg-white/5 transition-colors duration-300">
-                  <div className="flex items-start gap-4">
-                    <div className="p-2 glass rounded-lg">
-                      <GraduationCap className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold">{edu.school}</h3>
-                      <p className="text-muted-foreground">{edu.degree}</p>
-                      <p className="text-sm text-muted-foreground mt-1">{edu.period}</p>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="py-20">
-        <div className="container px-4 mx-auto">
-          <motion.div initial="initial" whileInView="animate" viewport={{
-          once: true
-        }} variants={fadeInUp} className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4 text-gradient">Let's Connect</h2>
-            <p className="text-muted-foreground mb-4">
-              Raichur, Karnataka, India | +91 - 8147940897
-            </p>
-            <motion.div className="flex justify-center gap-4 flex-wrap" variants={staggerContainer}>
-              <motion.div variants={fadeInUp}>
-                <Button variant="outline" size="lg" className="rounded-full glass hover:bg-white/10 transition-colors duration-300" onClick={() => window.open("https://github.com/0RBalaji", "_blank")}>
-                  <Github className="w-5 h-5 mr-2" />
-                  GitHub
-                </Button>
-              </motion.div>
-              <motion.div variants={fadeInUp}>
-                <Button variant="outline" size="lg" className="rounded-full glass hover:bg-white/10 transition-colors duration-300" onClick={() => window.open("https://linkedin.com/in/rbalaji02", "_blank")}>
-                  <Linkedin className="w-5 h-5 mr-2" />
-                  LinkedIn
-                </Button>
-              </motion.div>
-              <motion.div variants={fadeInUp}>
-                <Button variant="outline" size="lg" className="rounded-full glass hover:bg-white/10 transition-colors duration-300" onClick={handleContactClick}>
-                  <Mail className="w-5 h-5 mr-2" />
-                  Email
-                </Button>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-    </div>
-  );
-};
-
-export default Index;
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 gap-8" 
+            variants={staggerContainer} 
+            initial="initial" 
+            whileInView="animate" 
+            viewport={{ once: true }}
+          >
+            {collaborationProjects.map((project, index) => (
+              <motion.div 
+                key={index} 
+                
