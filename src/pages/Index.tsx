@@ -10,7 +10,7 @@ import {
   Microchip, Radio, Laptop, Component, Workflow,
   BarChart, LineChart, PieChart, Sigma, ChartBar, ArrowUpDown,
   Play, Timer, Factory, Network, Wifi, SlidersHorizontal,
-  GitFork
+  GitFork, Wrench as Tools
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -19,9 +19,7 @@ import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
 
   const handleContactClick = () => {
     toast({
@@ -169,6 +167,42 @@ const Index = () => {
     }
   ];
 
+  const softwareTools = [
+    {
+      category: "Development",
+      tools: [
+        { image: "/vscode.png", name: "Visual Studio Code" },
+        { image: "/github.png", name: "GitHub" },
+        { image: "/jupyter.png", name: "Jupyter Notebook" },
+        { image: "/pycharm.png", name: "PyCharm" },
+        { image: "/ros.png", name: "ROS" },
+        { image: "/gazebo.png", name: "Gazebo" }
+      ]
+    },
+    {
+      category: "Design & Modeling",
+      tools: [
+        { image: "/solidworks.png", name: "SolidWorks" },
+        { image: "/fusion360.png", name: "Fusion 360" },
+        { image: "/kicad.png", name: "KiCad" },
+        { image: "/blender.png", name: "Blender" },
+        { image: "/autocad.png", name: "AutoCAD" },
+        { image: "/ansys.png", name: "ANSYS" }
+      ]
+    },
+    {
+      category: "Industrial & Control",
+      tools: [
+        { image: "/labview.png", name: "LabVIEW" },
+        { image: "/matlab.png", name: "MATLAB" },
+        { image: "/plc.png", name: "PLC Programming" },
+        { image: "/codesys.png", name: "CODESYS" },
+        { image: "/twincat.png", name: "TwinCAT" },
+        { image: "/siemens.png", name: "Siemens TIA Portal" }
+      ]
+    }
+  ];
+
   const projects = [
     {
       title: "Project 1",
@@ -188,7 +222,8 @@ const Index = () => {
     }
   ];
 
-  return <div className="min-h-screen w-full overflow-hidden bg-gradient-to-b from-background via-background/95 to-background/90">
+  return (
+    <div className="min-h-screen w-full overflow-hidden bg-gradient-to-b from-background via-background/95 to-background/90">
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <motion.div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full border border-primary/20" animate={{
@@ -558,6 +593,66 @@ const Index = () => {
         </div>
       </section>
 
+      <section className="py-20 neo-blur">
+        <div className="container px-4 mx-auto">
+          <motion.div initial="initial" whileInView="animate" viewport={{
+          once: true
+        }} variants={fadeInUp} className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4 text-gradient">Software & Tools</h2>
+            <p className="text-muted-foreground">
+              Proficient in industry-standard software and development tools
+            </p>
+          </motion.div>
+
+          <div className="space-y-12">
+            {softwareTools.map((section, sectionIndex) => (
+              <motion.div
+                key={sectionIndex}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true }}
+                variants={fadeInUp}
+                className="space-y-6"
+              >
+                <div className="flex items-center gap-3">
+                  <Tools className="w-6 h-6 text-primary" />
+                  <h3 className="text-xl font-semibold text-gradient">{section.category}</h3>
+                </div>
+                <motion.div 
+                  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6"
+                  variants={{
+                    animate: {
+                      transition: {
+                        staggerChildren: 0.1
+                      }
+                    }
+                  }}
+                >
+                  {section.tools.map((tool, toolIndex) => (
+                    <motion.div
+                      key={toolIndex}
+                      variants={{
+                        initial: { opacity: 0, y: 20 },
+                        animate: { opacity: 1, y: 0 }
+                      }}
+                      whileHover={{ scale: 1.05 }}
+                      className="glass p-4 rounded-xl flex flex-col items-center justify-center aspect-square hover:bg-white/10 transition-colors duration-300"
+                    >
+                      <img
+                        src={tool.image}
+                        alt={tool.name}
+                        className="w-12 h-12 object-contain mb-2"
+                        title={tool.name}
+                      />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-20">
         <div className="container px-4 mx-auto">
           <motion.div initial="initial" whileInView="animate" viewport={{
@@ -633,7 +728,8 @@ const Index = () => {
           </motion.div>
         </div>
       </section>
-    </div>;
+    </div>
+  );
 };
 
 export default Index;
