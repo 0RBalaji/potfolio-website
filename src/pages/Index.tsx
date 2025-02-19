@@ -5,11 +5,12 @@ import {
   Briefcase, Home, Trophy, Award, BadgeCheck, Star, Code, 
   Settings, Terminal, Database, Brain, Cog, ExternalLink,
   Navigation, Eye, GitBranch, Search, Map, Router, 
-  FileCode, Binary, Javascript, Coffee, Git, Database as DbIcon,
-  Cube, Shapes, Ruler, Pencil, Boxes, Wrench,
-  Microchip, Radio, Laptop, Component, Circuit, Workflow,
+  FileCode, Binary, Coffee, Box, Database as DbIcon,
+  Shapes, Ruler, Pencil, Boxes, Wrench,
+  Microchip, Radio, Laptop, Component, Workflow,
   BarChart, LineChart, PieChart, Sigma, ChartBar, ArrowUpDown,
-  Play, Timer, Factory, Network, Wifi, SlidersHorizontal
+  Play, Timer, Factory, Network, Wifi, SlidersHorizontal,
+  GitFork
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -107,9 +108,9 @@ const Index = () => {
       skills: [
         { name: "Python", icon: <FileCode className="w-4 h-4 mr-2" />, image: "/python.png" },
         { name: "C++", icon: <Binary className="w-4 h-4 mr-2" />, image: "/cpp.png" },
-        { name: "JavaScript", icon: <Javascript className="w-4 h-4 mr-2" />, image: "/javascript.png" },
+        { name: "JavaScript", icon: <Code className="w-4 h-4 mr-2" />, image: "/javascript.png" },
         { name: "MATLAB", icon: <Coffee className="w-4 h-4 mr-2" />, image: "/matlab.png" },
-        { name: "Git", icon: <Git className="w-4 h-4 mr-2" />, image: "/git.png" },
+        { name: "Git", icon: <GitFork className="w-4 h-4 mr-2" />, image: "/git.png" },
         { name: "SQL", icon: <DbIcon className="w-4 h-4 mr-2" />, image: "/sql.png" }
       ],
       bgImage: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6"
@@ -118,7 +119,7 @@ const Index = () => {
       title: "Modelling",
       icon: <CircuitBoard className="w-10 h-10" />,
       skills: [
-        { name: "SolidWorks", icon: <Cube className="w-4 h-4 mr-2" />, image: "/solidworks.png" },
+        { name: "SolidWorks", icon: <Box className="w-4 h-4 mr-2" />, image: "/solidworks.png" },
         { name: "Fusion 360", icon: <Shapes className="w-4 h-4 mr-2" />, image: "/fusion360.png" },
         { name: "3D Modeling", icon: <Boxes className="w-4 h-4 mr-2" />, image: "/3d.png" },
         { name: "FEA", icon: <Ruler className="w-4 h-4 mr-2" />, image: "/fea.png" },
@@ -132,10 +133,10 @@ const Index = () => {
       icon: <Cpu className="w-10 h-10" />,
       skills: [
         { name: "Arduino", icon: <Microchip className="w-4 h-4 mr-2" />, image: "/arduino.png" },
-        { name: "Raspberry Pi", icon: <Circuit className="w-4 h-4 mr-2" />, image: "/raspberry.png" },
+        { name: "Raspberry Pi", icon: <CircuitBoard className="w-4 h-4 mr-2" />, image: "/raspberry.png" },
         { name: "PCB Design", icon: <Component className="w-4 h-4 mr-2" />, image: "/pcb.png" },
         { name: "Sensors", icon: <Radio className="w-4 h-4 mr-2" />, image: "/sensors.png" },
-        { name: "Circuits", icon: <Circuit className="w-4 h-4 mr-2" />, image: "/circuits.png" },
+        { name: "Circuits", icon: <CircuitBoard className="w-4 h-4 mr-2" />, image: "/circuits.png" },
         { name: "Embedded Systems", icon: <Workflow className="w-4 h-4 mr-2" />, image: "/embedded.png" }
       ],
       bgImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
@@ -165,6 +166,25 @@ const Index = () => {
         { name: "Process Control", icon: <Timer className="w-4 h-4 mr-2" />, image: "/process-control.png" }
       ],
       bgImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
+    }
+  ];
+
+  const projects = [
+    {
+      title: "Project 1",
+      brief: "Brief description of project 1",
+      fullDescription: "Full description of project 1 with details about the challenges, solutions, and outcomes.",
+      images: ["/path.png", "/slam.png"],
+      tools: "List of tools and technologies used in project 1",
+      links: [{ title: "GitHub Repo", url: "https://github.com" }]
+    },
+    {
+      title: "Project 2",
+      brief: "Brief description of project 2",
+      fullDescription: "Full description of project 2 with details about the challenges, solutions, and outcomes.",
+      images: ["/path.png", "/slam.png"],
+      tools: "List of tools and technologies used in project 2",
+      links: [{ title: "Live Demo", url: "https://example.com" }]
     }
   ];
 
