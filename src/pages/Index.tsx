@@ -4,7 +4,12 @@ import {
   Bot, Cpu, Github, Linkedin, Mail, CircuitBoard, GraduationCap, 
   Briefcase, Home, Trophy, Award, BadgeCheck, Star, Code, 
   Settings, Terminal, Database, Brain, Cog, ExternalLink,
-  Navigation, Eye, GitBranch, Search, Map, Router
+  Navigation, Eye, GitBranch, Search, Map, Router, 
+  FileCode, Binary, Javascript, Coffee, Git, Database as DbIcon,
+  Cube, Shapes, Ruler, Pencil, Boxes, Wrench,
+  Microchip, Radio, Laptop, Component, Circuit, Workflow,
+  BarChart, LineChart, PieChart, Sigma, ChartBar, ArrowUpDown,
+  Play, Timer, Factory, Network, Wifi, SlidersHorizontal
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -82,68 +87,86 @@ const Index = () => {
     }
   };
 
-  const roboticsSkills = [
-    { name: "ROS2", icon: <Terminal className="w-4 h-4 mr-2" />, image: "/ros.png" },
-    { name: "SLAM", icon: <Map className="w-4 h-4 mr-2" />, image: "/slam.png" },
-    { name: "Path Planning", icon: <Navigation className="w-4 h-4 mr-2" />, image: "/path.png" },
-    { name: "Computer Vision", icon: <Eye className="w-4 h-4 mr-2" />, image: "/cv.png" },
-    { name: "Motion Control", icon: <Router className="w-4 h-4 mr-2" />, image: "/motion.png" },
-    { name: "Kinematics", icon: <GitBranch className="w-4 h-4 mr-2" />, image: "/kinematics.png" }
+  const skillCategories = [
+    {
+      title: "Robotics",
+      icon: <Bot className="w-10 h-10" />,
+      skills: [
+        { name: "ROS2", icon: <Terminal className="w-4 h-4 mr-2" />, image: "/ros.png" },
+        { name: "SLAM", icon: <Map className="w-4 h-4 mr-2" />, image: "/slam.png" },
+        { name: "Path Planning", icon: <Navigation className="w-4 h-4 mr-2" />, image: "/path.png" },
+        { name: "Computer Vision", icon: <Eye className="w-4 h-4 mr-2" />, image: "/cv.png" },
+        { name: "Motion Control", icon: <Router className="w-4 h-4 mr-2" />, image: "/motion.png" },
+        { name: "Kinematics", icon: <GitBranch className="w-4 h-4 mr-2" />, image: "/kinematics.png" }
+      ],
+      bgImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
+    },
+    {
+      title: "Programming",
+      icon: <Code className="w-10 h-10" />,
+      skills: [
+        { name: "Python", icon: <FileCode className="w-4 h-4 mr-2" />, image: "/python.png" },
+        { name: "C++", icon: <Binary className="w-4 h-4 mr-2" />, image: "/cpp.png" },
+        { name: "JavaScript", icon: <Javascript className="w-4 h-4 mr-2" />, image: "/javascript.png" },
+        { name: "MATLAB", icon: <Coffee className="w-4 h-4 mr-2" />, image: "/matlab.png" },
+        { name: "Git", icon: <Git className="w-4 h-4 mr-2" />, image: "/git.png" },
+        { name: "SQL", icon: <DbIcon className="w-4 h-4 mr-2" />, image: "/sql.png" }
+      ],
+      bgImage: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6"
+    },
+    {
+      title: "Modelling",
+      icon: <CircuitBoard className="w-10 h-10" />,
+      skills: [
+        { name: "SolidWorks", icon: <Cube className="w-4 h-4 mr-2" />, image: "/solidworks.png" },
+        { name: "Fusion 360", icon: <Shapes className="w-4 h-4 mr-2" />, image: "/fusion360.png" },
+        { name: "3D Modeling", icon: <Boxes className="w-4 h-4 mr-2" />, image: "/3d.png" },
+        { name: "FEA", icon: <Ruler className="w-4 h-4 mr-2" />, image: "/fea.png" },
+        { name: "CAD/CAM", icon: <Pencil className="w-4 h-4 mr-2" />, image: "/cadcam.png" },
+        { name: "Technical Drawing", icon: <Wrench className="w-4 h-4 mr-2" />, image: "/technical.png" }
+      ],
+      bgImage: "https://images.unsplash.com/photo-1487887235947-a955ef187fcc"
+    },
+    {
+      title: "Electronics",
+      icon: <Cpu className="w-10 h-10" />,
+      skills: [
+        { name: "Arduino", icon: <Microchip className="w-4 h-4 mr-2" />, image: "/arduino.png" },
+        { name: "Raspberry Pi", icon: <Circuit className="w-4 h-4 mr-2" />, image: "/raspberry.png" },
+        { name: "PCB Design", icon: <Component className="w-4 h-4 mr-2" />, image: "/pcb.png" },
+        { name: "Sensors", icon: <Radio className="w-4 h-4 mr-2" />, image: "/sensors.png" },
+        { name: "Circuits", icon: <Circuit className="w-4 h-4 mr-2" />, image: "/circuits.png" },
+        { name: "Embedded Systems", icon: <Workflow className="w-4 h-4 mr-2" />, image: "/embedded.png" }
+      ],
+      bgImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+    },
+    {
+      title: "Analysis",
+      icon: <Brain className="w-10 h-10" />,
+      skills: [
+        { name: "Data Analysis", icon: <BarChart className="w-4 h-4 mr-2" />, image: "/data.png" },
+        { name: "Optimization", icon: <ArrowUpDown className="w-4 h-4 mr-2" />, image: "/optimization.png" },
+        { name: "Quality Control", icon: <ChartBar className="w-4 h-4 mr-2" />, image: "/quality.png" },
+        { name: "Process Analysis", icon: <LineChart className="w-4 h-4 mr-2" />, image: "/process.png" },
+        { name: "Statistics", icon: <PieChart className="w-4 h-4 mr-2" />, image: "/statistics.png" },
+        { name: "Metrics", icon: <Sigma className="w-4 h-4 mr-2" />, image: "/metrics.png" }
+      ],
+      bgImage: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9"
+    },
+    {
+      title: "Automation",
+      icon: <Cog className="w-10 h-10" />,
+      skills: [
+        { name: "PLC", icon: <Play className="w-4 h-4 mr-2" />, image: "/plc.png" },
+        { name: "Industrial", icon: <Factory className="w-4 h-4 mr-2" />, image: "/industrial.png" },
+        { name: "SCADA", icon: <SlidersHorizontal className="w-4 h-4 mr-2" />, image: "/scada.png" },
+        { name: "Industry 4.0", icon: <Network className="w-4 h-4 mr-2" />, image: "/industry40.png" },
+        { name: "IoT", icon: <Wifi className="w-4 h-4 mr-2" />, image: "/iot.png" },
+        { name: "Process Control", icon: <Timer className="w-4 h-4 mr-2" />, image: "/process-control.png" }
+      ],
+      bgImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
+    }
   ];
-
-  const projects = [{
-    title: "SWARM-SLAM: Understanding Unknown Environments",
-    brief: "Enhanced flexibility and adaptability of Multi-Robot Systems (MRS) using multiple AMRs for task automation.",
-    fullDescription: "Enhanced flexibility and adaptability of Multi-Robot Systems (MRS) on the shop floor by utilizing multiple AMRs for tasks product and raw material transport. The system leverages advanced SLAM techniques and the NAV2 stack for efficient navigation and mapping.",
-    tools: "ROS2 Framework, NAV2 stack, AMCL, Process Automation, Robotics, Python, LiDAR",
-    images: ["/placeholder.svg", "/placeholder.svg"],
-    links: [{
-      title: "GitHub Repository",
-      url: "https://github.com/yourusername/swarm-slam"
-    }, {
-      title: "Documentation",
-      url: "#"
-    }]
-  }, {
-    title: "Cartesian Robot for Painting Application",
-    brief: "Automated painting process using computer vision for work-piece analysis and path planning.",
-    fullDescription: "A Cartesian robot designed to automate the painting process, using advanced computer vision algorithms for analyzing work-piece shape and selecting optimal paint paths. The system integrates multiple sensors and precise motion control.",
-    tools: "Python, Process Automation, Raspberry Pi, Circuit design, SolidWorks, Motion Study",
-    images: ["/placeholder.svg", "/placeholder.svg"],
-    links: [{
-      title: "Project Demo",
-      url: "#"
-    }, {
-      title: "Technical Paper",
-      url: "#"
-    }]
-  }, {
-    title: "Extraterrestrial Rover",
-    brief: "Autonomous rover designed for extraterrestrial exploration and mapping missions.",
-    fullDescription: "An Extraterrestrial rover designed for autonomous missions, enabling local mapping and traversing techniques. Features advanced sensor fusion and autonomous navigation capabilities for unknown terrain.",
-    tools: "Robot system design, Robot programming, Sensor fusion, Circuit design, Jetson Nano",
-    images: ["/placeholder.svg", "/placeholder.svg"],
-    links: [{
-      title: "Project Overview",
-      url: "#"
-    }, {
-      title: "Research Paper",
-      url: "#"
-    }]
-  }, {
-    title: "Home Automation - Garden System",
-    brief: "Smart garden maintenance system with automated watering based on environmental conditions.",
-    fullDescription: "A watering and maintaining garden robot based on soil moisture levels and environmental temperature. Implements IoT connectivity for remote monitoring and control of garden conditions.",
-    tools: "MATLAB, Simulink, SolidWorks, Motion study, FEA, Arduino, IoT, process automation",
-    images: ["/placeholder.svg", "/placeholder.svg"],
-    links: [{
-      title: "System Architecture",
-      url: "#"
-    }, {
-      title: "Implementation Guide",
-      url: "#"
-    }]
-  }];
 
   return <div className="min-h-screen w-full overflow-hidden bg-gradient-to-b from-background via-background/95 to-background/90">
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -245,37 +268,7 @@ const Index = () => {
             </p>
           </motion.div>
 
-          {[{
-            title: "Robotics",
-            icon: <Bot className="w-10 h-10" />,
-            skills: roboticsSkills,
-            bgImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
-          }, {
-            title: "Programming",
-            icon: <Code className="w-10 h-10" />,
-            skills: ["Python", "C++", "JavaScript", "MATLAB", "Git", "SQL"],
-            bgImage: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6"
-          }, {
-            title: "Modelling",
-            icon: <CircuitBoard className="w-10 h-10" />,
-            skills: ["SolidWorks", "Fusion 360", "3D Modeling", "FEA", "CAD/CAM", "Technical Drawing"],
-            bgImage: "https://images.unsplash.com/photo-1487887235947-a955ef187fcc"
-          }, {
-            title: "Electronics",
-            icon: <Cpu className="w-10 h-10" />,
-            skills: ["Arduino", "Raspberry Pi", "PCB Design", "Sensors", "Circuits", "Embedded Systems"],
-            bgImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
-          }, {
-            title: "Analysis",
-            icon: <Brain className="w-10 h-10" />,
-            skills: ["Data Analysis", "Optimization", "Quality Control", "Process Analysis", "Statistics", "Metrics"],
-            bgImage: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9"
-          }, {
-            title: "Automation",
-            icon: <Cog className="w-10 h-10" />,
-            skills: ["PLC", "Industrial", "SCADA", "Industry 4.0", "IoT", "Process Control"],
-            bgImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
-          }].map((category, index) => (
+          {skillCategories.map((category, index) => (
             <motion.div 
               key={index}
               initial="initial"
@@ -301,51 +294,32 @@ const Index = () => {
                 </div>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-                {category.title === "Robotics" ? (
-                  roboticsSkills.map((skill, skillIndex) => (
-                    <motion.div
-                      key={skillIndex}
-                      variants={{
-                        initial: { opacity: 0, y: 20 },
-                        animate: {
-                          opacity: 1,
-                          y: 0,
-                          transition: { delay: skillIndex * 0.1 }
-                        }
-                      }}
-                      className="glass px-4 py-3 rounded-lg hover:bg-white/10 transition-colors duration-300"
-                    >
-                      <div className="flex flex-col items-center space-y-2">
-                        <img 
-                          src={skill.image} 
-                          alt={skill.name}
-                          className="w-8 h-8 object-contain mb-2"
-                        />
-                        <div className="flex items-center">
-                          {skill.icon}
-                          <span className="text-sm font-medium">{skill.name}</span>
-                        </div>
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.div
+                    key={skillIndex}
+                    variants={{
+                      initial: { opacity: 0, y: 20 },
+                      animate: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { delay: skillIndex * 0.1 }
+                      }
+                    }}
+                    className="glass px-4 py-3 rounded-lg hover:bg-white/10 transition-colors duration-300"
+                  >
+                    <div className="flex flex-col items-center space-y-2">
+                      <img 
+                        src={skill.image} 
+                        alt={skill.name}
+                        className="w-8 h-8 object-contain mb-2"
+                      />
+                      <div className="flex items-center">
+                        {skill.icon}
+                        <span className="text-sm font-medium">{skill.name}</span>
                       </div>
-                    </motion.div>
-                  ))
-                ) : (
-                  category.skills.map((skill, skillIndex) => (
-                    <motion.div
-                      key={skillIndex}
-                      variants={{
-                        initial: { opacity: 0, y: 20 },
-                        animate: {
-                          opacity: 1,
-                          y: 0,
-                          transition: { delay: skillIndex * 0.1 }
-                        }
-                      }}
-                      className="glass px-4 py-2 rounded-lg hover:bg-white/10 transition-colors duration-300"
-                    >
-                      <span className="text-sm font-medium">{skill}</span>
-                    </motion.div>
-                  ))
-                )}
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           ))}
