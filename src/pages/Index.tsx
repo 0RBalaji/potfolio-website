@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bot, Cpu, Github, Linkedin, Mail, CircuitBoard, GraduationCap, Briefcase, Home, Trophy, Award, BadgeCheck, Star, Code, Settings, Terminal, Database, Brain, Cog, ExternalLink } from "lucide-react";
+import { 
+  Bot, Cpu, Github, Linkedin, Mail, CircuitBoard, GraduationCap, 
+  Briefcase, Home, Trophy, Award, BadgeCheck, Star, Code, 
+  Settings, Terminal, Database, Brain, Cog, ExternalLink 
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+
 const Index = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const {
     toast
   } = useToast();
+
   const handleContactClick = () => {
     toast({
       title: "Contact info copied!",
@@ -17,6 +23,7 @@ const Index = () => {
     });
     navigator.clipboard.writeText("rajalbandi2balaji@gmail.com");
   };
+
   const fadeInUp = {
     initial: {
       opacity: 0,
@@ -31,6 +38,7 @@ const Index = () => {
       y: -20
     }
   };
+
   const staggerContainer = {
     animate: {
       transition: {
@@ -38,6 +46,7 @@ const Index = () => {
       }
     }
   };
+
   const cardVariants = {
     initial: {
       scale: 0.95,
@@ -57,6 +66,7 @@ const Index = () => {
       }
     }
   };
+
   const backgroundVariants = {
     initial: {
       background: "linear-gradient(45deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 100%)"
@@ -70,6 +80,7 @@ const Index = () => {
       }
     }
   };
+
   const projects = [{
     title: "SWARM-SLAM: Understanding Unknown Environments",
     brief: "Enhanced flexibility and adaptability of Multi-Robot Systems (MRS) using multiple AMRs for task automation.",
@@ -123,6 +134,46 @@ const Index = () => {
       url: "#"
     }]
   }];
+
+  const skillCategories = [
+    {
+      title: "Robotics",
+      icon: <Bot className="w-10 h-10" />,
+      skills: ["ROS2", "SLAM", "Path Planning", "Computer Vision", "Motion Control", "Kinematics"],
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475"
+    },
+    {
+      title: "Programming",
+      icon: <Code className="w-10 h-10" />,
+      skills: ["Python", "C++", "JavaScript", "MATLAB", "Git", "SQL"],
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6"
+    },
+    {
+      title: "Modelling",
+      icon: <CircuitBoard className="w-10 h-10" />,
+      skills: ["SolidWorks", "Fusion 360", "3D Modeling", "FEA", "CAD/CAM", "Technical Drawing"],
+      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7"
+    },
+    {
+      title: "Electronics",
+      icon: <Cpu className="w-10 h-10" />,
+      skills: ["Arduino", "Raspberry Pi", "PCB Design", "Sensors", "Circuits", "Embedded Systems"],
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+    },
+    {
+      title: "Analysis",
+      icon: <Brain className="w-10 h-10" />,
+      skills: ["Data Analysis", "Optimization", "Quality Control", "Process Analysis", "Statistics", "Metrics"],
+      image: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9"
+    },
+    {
+      title: "Automation",
+      icon: <Cog className="w-10 h-10" />,
+      skills: ["PLC", "Industrial", "SCADA", "Industry 4.0", "IoT", "Process Control"],
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475"
+    }
+  ];
+
   return <div className="min-h-screen w-full overflow-hidden bg-gradient-to-b from-background via-background/95 to-background/90">
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
@@ -223,57 +274,54 @@ const Index = () => {
             </p>
           </motion.div>
 
-          {[{
-          title: "Robotics",
-          icon: <Bot className="w-10 h-10" />,
-          skills: ["ROS2", "SLAM", "Path Planning", "Computer Vision", "Motion Control", "Kinematics"]
-        }, {
-          title: "Programming",
-          icon: <Code className="w-10 h-10" />,
-          skills: ["Python", "C++", "JavaScript", "MATLAB", "Git", "SQL"]
-        }, {
-          title: "Modelling",
-          icon: <CircuitBoard className="w-10 h-10" />,
-          skills: ["SolidWorks", "Fusion 360", "3D Modeling", "FEA", "CAD/CAM", "Technical Drawing"]
-        }, {
-          title: "Electronics",
-          icon: <Cpu className="w-10 h-10" />,
-          skills: ["Arduino", "Raspberry Pi", "PCB Design", "Sensors", "Circuits", "Embedded Systems"]
-        }, {
-          title: "Analysis",
-          icon: <Brain className="w-10 h-10" />,
-          skills: ["Data Analysis", "Optimization", "Quality Control", "Process Analysis", "Statistics", "Metrics"]
-        }, {
-          title: "Automation",
-          icon: <Cog className="w-10 h-10" />,
-          skills: ["PLC", "Industrial", "SCADA", "Industry 4.0", "IoT", "Process Control"]
-        }].map((category, index) => <motion.div key={index} initial="initial" whileInView="animate" viewport={{
-          once: true
-        }} variants={fadeInUp} className="mb-16">
+          {skillCategories.map((category, index) => (
+            <motion.div 
+              key={index}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="mb-16"
+            >
               <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 glass rounded-xl">
-                  {category.icon}
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="p-3 glass rounded-xl relative z-10">
+                    {category.icon}
+                  </div>
                 </div>
                 <h3 className="text-2xl font-bold text-gradient">{category.title}</h3>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-                {category.skills.map((skill, skillIndex) => <motion.div key={skillIndex} variants={{
-              initial: {
-                opacity: 0,
-                y: 20
-              },
-              animate: {
-                opacity: 1,
-                y: 0,
-                transition: {
-                  delay: skillIndex * 0.1
-                }
-              }
-            }} className="glass px-4 py-2 rounded-lg hover:bg-white/10 transition-colors duration-300">
-                    <span className="text-sm font-medium">{skill}</span>
-                  </motion.div>)}
+              <div className="grid grid-cols-1 md:grid-cols-7 gap-4">
+                <div className="md:col-span-1 relative aspect-video md:aspect-square rounded-lg overflow-hidden">
+                  <img 
+                    src={category.image} 
+                    alt={category.title}
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                </div>
+                <div className="md:col-span-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+                  {category.skills.map((skill, skillIndex) => (
+                    <motion.div
+                      key={skillIndex}
+                      variants={{
+                        initial: { opacity: 0, y: 20 },
+                        animate: {
+                          opacity: 1,
+                          y: 0,
+                          transition: { delay: skillIndex * 0.1 }
+                        }
+                      }}
+                      className="glass px-4 py-2 rounded-lg hover:bg-white/10 transition-colors duration-300"
+                    >
+                      <span className="text-sm font-medium">{skill}</span>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-            </motion.div>)}
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -554,4 +602,5 @@ const Index = () => {
       </section>
     </div>;
 };
+
 export default Index;
