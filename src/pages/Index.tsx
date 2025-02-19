@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bot, Cpu, Github, Linkedin, Mail, CircuitBoard, GraduationCap, Briefcase, Home, Trophy, Award, BadgeCheck, Star, Code, Settings, Terminal, Database, Brain, Cog, ExternalLink } from "lucide-react";
+import { 
+  Bot, Cpu, Github, Linkedin, Mail, CircuitBoard, GraduationCap, 
+  Briefcase, Home, Trophy, Award, BadgeCheck, Star, Code, 
+  Settings, Terminal, Database, Brain, Cog, ExternalLink,
+  Navigation, Eye, GitBranch, Search, Map, Router
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+
 const Index = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const {
     toast
   } = useToast();
+
   const handleContactClick = () => {
     toast({
       title: "Contact info copied!",
@@ -17,6 +24,7 @@ const Index = () => {
     });
     navigator.clipboard.writeText("rajalbandi2balaji@gmail.com");
   };
+
   const fadeInUp = {
     initial: {
       opacity: 0,
@@ -31,6 +39,7 @@ const Index = () => {
       y: -20
     }
   };
+
   const staggerContainer = {
     animate: {
       transition: {
@@ -38,6 +47,7 @@ const Index = () => {
       }
     }
   };
+
   const cardVariants = {
     initial: {
       scale: 0.95,
@@ -57,6 +67,7 @@ const Index = () => {
       }
     }
   };
+
   const backgroundVariants = {
     initial: {
       background: "linear-gradient(45deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 100%)"
@@ -70,6 +81,16 @@ const Index = () => {
       }
     }
   };
+
+  const roboticsSkills = [
+    { name: "ROS2", icon: <Terminal className="w-4 h-4 mr-2" />, image: "/ros.png" },
+    { name: "SLAM", icon: <Map className="w-4 h-4 mr-2" />, image: "/slam.png" },
+    { name: "Path Planning", icon: <Navigation className="w-4 h-4 mr-2" />, image: "/path.png" },
+    { name: "Computer Vision", icon: <Eye className="w-4 h-4 mr-2" />, image: "/cv.png" },
+    { name: "Motion Control", icon: <Router className="w-4 h-4 mr-2" />, image: "/motion.png" },
+    { name: "Kinematics", icon: <GitBranch className="w-4 h-4 mr-2" />, image: "/kinematics.png" }
+  ];
+
   const projects = [{
     title: "SWARM-SLAM: Understanding Unknown Environments",
     brief: "Enhanced flexibility and adaptability of Multi-Robot Systems (MRS) using multiple AMRs for task automation.",
@@ -123,6 +144,7 @@ const Index = () => {
       url: "#"
     }]
   }];
+
   return <div className="min-h-screen w-full overflow-hidden bg-gradient-to-b from-background via-background/95 to-background/90">
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
@@ -224,56 +246,109 @@ const Index = () => {
           </motion.div>
 
           {[{
-          title: "Robotics",
-          icon: <Bot className="w-10 h-10" />,
-          skills: ["ROS2", "SLAM", "Path Planning", "Computer Vision", "Motion Control", "Kinematics"]
-        }, {
-          title: "Programming",
-          icon: <Code className="w-10 h-10" />,
-          skills: ["Python", "C++", "JavaScript", "MATLAB", "Git", "SQL"]
-        }, {
-          title: "Modelling",
-          icon: <CircuitBoard className="w-10 h-10" />,
-          skills: ["SolidWorks", "Fusion 360", "3D Modeling", "FEA", "CAD/CAM", "Technical Drawing"]
-        }, {
-          title: "Electronics",
-          icon: <Cpu className="w-10 h-10" />,
-          skills: ["Arduino", "Raspberry Pi", "PCB Design", "Sensors", "Circuits", "Embedded Systems"]
-        }, {
-          title: "Analysis",
-          icon: <Brain className="w-10 h-10" />,
-          skills: ["Data Analysis", "Optimization", "Quality Control", "Process Analysis", "Statistics", "Metrics"]
-        }, {
-          title: "Automation",
-          icon: <Cog className="w-10 h-10" />,
-          skills: ["PLC", "Industrial", "SCADA", "Industry 4.0", "IoT", "Process Control"]
-        }].map((category, index) => <motion.div key={index} initial="initial" whileInView="animate" viewport={{
-          once: true
-        }} variants={fadeInUp} className="mb-16">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 glass rounded-xl">
-                  {category.icon}
+            title: "Robotics",
+            icon: <Bot className="w-10 h-10" />,
+            skills: roboticsSkills,
+            bgImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
+          }, {
+            title: "Programming",
+            icon: <Code className="w-10 h-10" />,
+            skills: ["Python", "C++", "JavaScript", "MATLAB", "Git", "SQL"],
+            bgImage: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6"
+          }, {
+            title: "Modelling",
+            icon: <CircuitBoard className="w-10 h-10" />,
+            skills: ["SolidWorks", "Fusion 360", "3D Modeling", "FEA", "CAD/CAM", "Technical Drawing"],
+            bgImage: "https://images.unsplash.com/photo-1487887235947-a955ef187fcc"
+          }, {
+            title: "Electronics",
+            icon: <Cpu className="w-10 h-10" />,
+            skills: ["Arduino", "Raspberry Pi", "PCB Design", "Sensors", "Circuits", "Embedded Systems"],
+            bgImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+          }, {
+            title: "Analysis",
+            icon: <Brain className="w-10 h-10" />,
+            skills: ["Data Analysis", "Optimization", "Quality Control", "Process Analysis", "Statistics", "Metrics"],
+            bgImage: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9"
+          }, {
+            title: "Automation",
+            icon: <Cog className="w-10 h-10" />,
+            skills: ["PLC", "Industrial", "SCADA", "Industry 4.0", "IoT", "Process Control"],
+            bgImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
+          }].map((category, index) => (
+            <motion.div 
+              key={index}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="mb-16"
+            >
+              <div className="relative mb-6 p-4 rounded-xl overflow-hidden">
+                <div className="absolute inset-0">
+                  <img 
+                    src={category.bgImage} 
+                    alt={category.title} 
+                    className="w-full h-full object-cover opacity-20"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background" />
                 </div>
-                <h3 className="text-2xl font-bold text-gradient">{category.title}</h3>
+                <div className="relative z-10 flex items-center gap-4">
+                  <div className="p-3 glass rounded-xl">
+                    {category.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold text-gradient">{category.title}</h3>
+                </div>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-                {category.skills.map((skill, skillIndex) => <motion.div key={skillIndex} variants={{
-              initial: {
-                opacity: 0,
-                y: 20
-              },
-              animate: {
-                opacity: 1,
-                y: 0,
-                transition: {
-                  delay: skillIndex * 0.1
-                }
-              }
-            }} className="glass px-4 py-2 rounded-lg hover:bg-white/10 transition-colors duration-300">
-                    <span className="text-sm font-medium">{skill}</span>
-                  </motion.div>)}
+                {category.title === "Robotics" ? (
+                  roboticsSkills.map((skill, skillIndex) => (
+                    <motion.div
+                      key={skillIndex}
+                      variants={{
+                        initial: { opacity: 0, y: 20 },
+                        animate: {
+                          opacity: 1,
+                          y: 0,
+                          transition: { delay: skillIndex * 0.1 }
+                        }
+                      }}
+                      className="glass px-4 py-3 rounded-lg hover:bg-white/10 transition-colors duration-300"
+                    >
+                      <div className="flex flex-col items-center space-y-2">
+                        <img 
+                          src={skill.image} 
+                          alt={skill.name}
+                          className="w-8 h-8 object-contain mb-2"
+                        />
+                        <div className="flex items-center">
+                          {skill.icon}
+                          <span className="text-sm font-medium">{skill.name}</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))
+                ) : (
+                  category.skills.map((skill, skillIndex) => (
+                    <motion.div
+                      key={skillIndex}
+                      variants={{
+                        initial: { opacity: 0, y: 20 },
+                        animate: {
+                          opacity: 1,
+                          y: 0,
+                          transition: { delay: skillIndex * 0.1 }
+                        }
+                      }}
+                      className="glass px-4 py-2 rounded-lg hover:bg-white/10 transition-colors duration-300"
+                    >
+                      <span className="text-sm font-medium">{skill}</span>
+                    </motion.div>
+                  ))
+                )}
               </div>
-            </motion.div>)}
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -347,25 +422,27 @@ const Index = () => {
             date: "2023",
             description: "Recognition for technical contributions and innovative solutions",
             icon: "star"
-          }].map((achievement, index) => <motion.div key={index} variants={fadeInUp} transition={{
-            duration: 0.8
-          }}>
-                <Card className="p-6 h-full glass hover:bg-white/5 transition-colors duration-300">
-                  <div className="flex items-start gap-4">
-                    <div className="p-2 glass rounded-lg">
-                      {achievement.icon === "trophy" && <Trophy className="w-6 h-6" />}
-                      {achievement.icon === "award" && <Award className="w-6 h-6" />}
-                      {achievement.icon === "badge-check" && <BadgeCheck className="w-6 h-6" />}
-                      {achievement.icon === "star" && <Star className="w-6 h-6" />}
+          }].map((achievement, index) => (
+                <motion.div key={index} variants={fadeInUp} transition={{
+                  duration: 0.8
+                }}>
+                  <Card className="p-6 h-full glass hover:bg-white/5 transition-colors duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="p-2 glass rounded-lg">
+                        {achievement.icon === "trophy" && <Trophy className="w-6 h-6" />}
+                        {achievement.icon === "award" && <Award className="w-6 h-6" />}
+                        {achievement.icon === "badge-check" && <BadgeCheck className="w-6 h-6" />}
+                        {achievement.icon === "star" && <Star className="w-6 h-6" />}
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold mb-1">{achievement.title}</h3>
+                        <p className="text-sm text-muted-foreground mb-2">{achievement.issuer} • {achievement.date}</p>
+                        <p className="text-muted-foreground text-sm">{achievement.description}</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold mb-1">{achievement.title}</h3>
-                      <p className="text-sm text-muted-foreground mb-2">{achievement.issuer} • {achievement.date}</p>
-                      <p className="text-muted-foreground text-sm">{achievement.description}</p>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>)}
+                  </Card>
+                </motion.div>
+              ))}
           </motion.div>
         </div>
       </section>
@@ -384,50 +461,53 @@ const Index = () => {
           <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8" variants={staggerContainer} initial="initial" whileInView="animate" viewport={{
           once: true
         }}>
-            {projects.map((project, index) => <motion.div key={index} variants={cardVariants} initial="initial" whileInView="animate" whileHover="hover" viewport={{
-            once: true
-          }} className="relative h-full">
+            {projects.map((project, index) => (
+              <motion.div key={index} variants={cardVariants} initial="initial" whileInView="animate" whileHover="hover" viewport={{
+                once: true
+              }} className="relative h-full">
                 <motion.div className="absolute inset-0 rounded-lg opacity-30" variants={backgroundVariants} initial="initial" animate="animate" />
                 <Card className="relative overflow-hidden glass hover:bg-white/5 transition-colors duration-300 cursor-pointer backdrop-blur-sm h-full" onClick={() => setSelectedProject(index)}>
                   <motion.div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/50 to-primary" animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.3, 0.5, 0.3]
-              }} transition={{
-                duration: 3,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }} />
+                    scale: [1, 1.5, 1],
+                    opacity: [0.3, 0.5, 0.3]
+                  }} transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }} />
                   <div className="p-6 relative z-10">
                     <motion.div initial={{
-                  opacity: 0,
-                  y: 20
-                }} animate={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  delay: 0.2
-                }}>
+                      opacity: 0,
+                      y: 20
+                    }} animate={{
+                      opacity: 1,
+                      y: 0
+                    }} transition={{
+                      delay: 0.2
+                    }}>
                       <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                       <p className="text-muted-foreground mb-4">{project.brief}</p>
                       <Button variant="outline" className="mt-4 relative overflow-hidden group">
                         <span className="relative z-10">View Details</span>
                         <motion.div className="absolute inset-0 bg-primary/10" initial={{
-                      x: "-100%"
-                    }} whileHover={{
-                      x: "100%"
-                    }} transition={{
-                      duration: 0.5
-                    }} />
+                          x: "-100%"
+                        }} whileHover={{
+                          x: "100%"
+                        }} transition={{
+                          duration: 0.5
+                        }} />
                         <ExternalLink className="ml-2 w-4 h-4 relative z-10" />
                       </Button>
                     </motion.div>
                   </div>
                 </Card>
-              </motion.div>)}
+              </motion.div>
+            ))}
           </motion.div>
 
           <Dialog open={selectedProject !== null} onOpenChange={() => setSelectedProject(null)}>
-            {selectedProject !== null && <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+            {selectedProject !== null && (
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
                 <DialogHeader>
                   <DialogTitle className="text-2xl font-bold mb-4">
                     {projects[selectedProject].title}
@@ -435,26 +515,28 @@ const Index = () => {
                 </DialogHeader>
                 <div className="space-y-6">
                   <div className="grid grid-cols-2 gap-4">
-                    {projects[selectedProject].images.map((image, idx) => <motion.div key={idx} initial={{
-                  opacity: 0,
-                  y: 20
-                }} animate={{
-                  opacity: 1,
-                  y: 0
-                }} transition={{
-                  delay: idx * 0.2
-                }} className="relative aspect-video rounded-lg overflow-hidden glass">
+                    {projects[selectedProject].images.map((image, idx) => (
+                      <motion.div key={idx} initial={{
+                        opacity: 0,
+                        y: 20
+                      }} animate={{
+                        opacity: 1,
+                        y: 0
+                      }} transition={{
+                        delay: idx * 0.2
+                      }} className="relative aspect-video rounded-lg overflow-hidden glass">
                         <img src={image} alt={`Project image ${idx + 1}`} className="object-cover w-full h-full" />
-                      </motion.div>)}
+                      </motion.div>
+                    ))}
                   </div>
                   
                   <motion.div initial={{
-                opacity: 0,
-                y: 20
-              }} animate={{
-                opacity: 1,
-                y: 0
-              }} className="space-y-4">
+                    opacity: 0,
+                    y: 20
+                  }} animate={{
+                    opacity: 1,
+                    y: 0
+                  }} className="space-y-4">
                     <DialogDescription className="text-lg leading-relaxed">
                       {projects[selectedProject].fullDescription}
                     </DialogDescription>
@@ -467,14 +549,17 @@ const Index = () => {
                     </div>
 
                     <div className="flex flex-wrap gap-4 mt-6">
-                      {projects[selectedProject].links.map((link, idx) => <Button key={idx} variant="outline" className="glass hover:bg-white/10" onClick={() => window.open(link.url, "_blank")}>
+                      {projects[selectedProject].links.map((link, idx) => (
+                        <Button key={idx} variant="outline" className="glass hover:bg-white/10" onClick={() => window.open(link.url, "_blank")}>
                           {link.title}
                           <ExternalLink className="ml-2 w-4 h-4" />
-                        </Button>)}
+                        </Button>
+                      ))}
                     </div>
                   </motion.div>
                 </div>
-              </DialogContent>}
+              </DialogContent>
+            )}
           </Dialog>
         </div>
       </section>
@@ -491,18 +576,19 @@ const Index = () => {
           once: true
         }}>
             {[{
-            school: "KLE TECHNOLOGICAL UNIVERSITY, HUBBALLI",
-            degree: "B.E. in Automation & Robotics (GPA: 8.52)",
-            period: "12/2021 - PRESENT"
-          }, {
-            school: "ALVAS PU COLLEGE, VIDYAGIRI",
-            degree: "PCME – DISTINCTION – 94.66%",
-            period: "04/2020 - 07/2021"
-          }, {
-            school: "RACE CONCEPT SCHOOL, RAICHUR",
-            degree: "DISTINCTION - 85.5%",
-            period: "05/2018 - 04/2019"
-          }].map((edu, index) => <motion.div key={index} variants={fadeInUp}>
+              school: "KLE TECHNOLOGICAL UNIVERSITY, HUBBALLI",
+              degree: "B.E. in Automation & Robotics (GPA: 8.52)",
+              period: "12/2021 - PRESENT"
+            }, {
+              school: "ALVAS PU COLLEGE, VIDYAGIRI",
+              degree: "PCME – DISTINCTION – 94.66%",
+              period: "04/2020 - 07/2021"
+            }, {
+              school: "RACE CONCEPT SCHOOL, RAICHUR",
+              degree: "DISTINCTION - 85.5%",
+              period: "05/2018 - 04/2019"
+            }].map((edu, index) => (
+              <motion.div key={index} variants={fadeInUp}>
                 <Card className="p-6 glass hover:bg-white/5 transition-colors duration-300">
                   <div className="flex items-start gap-4">
                     <div className="p-2 glass rounded-lg">
@@ -515,7 +601,8 @@ const Index = () => {
                     </div>
                   </div>
                 </Card>
-              </motion.div>)}
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -554,4 +641,5 @@ const Index = () => {
       </section>
     </div>;
 };
+
 export default Index;
