@@ -419,7 +419,13 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <motion.div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-4xl mx-auto" variants={staggerContainer}>
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-4xl mx-auto" 
+            variants={staggerContainer}
+            initial="initial" 
+            whileInView="animate" 
+            viewport={{ once: true }}
+          >
             <motion.div variants={fadeInUp}>
               <Card className="p-6 h-full neo-blur hover:bg-white/5 transition-colors duration-300">
                 <div className="mb-4 inline-flex p-3 glass rounded-lg">
