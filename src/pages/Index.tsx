@@ -368,7 +368,7 @@ const Index = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background" />
                 </div>
-                <div className="relative z-10 flex items-center gap-4">
+                <div className="absolute inset-0 z-10 flex items-center gap-4">
                   <div className="p-3 glass rounded-xl">
                     {category.icon}
                   </div>
@@ -445,199 +445,13 @@ const Index = () => {
           <motion.div initial="initial" whileInView="animate" viewport={{
           once: true
         }} variants={fadeInUp} className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-gradient">Certifications & Achievements</h2>
-            <p className="text-muted-foreground">
-              Recognition and accomplishments in robotics and automation
-            </p>
-          </motion.div>
-
-          <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto" variants={staggerContainer} initial="initial" whileInView="animate" viewport={{
-          once: true
-        }}>
-            {[{
-            title: "Robotics & Industry 4.0",
-            issuer: "Coursera",
-            date: "2023",
-            description: "Advanced certification in modern robotics and Industry 4.0 technologies",
-            icon: "trophy"
-          }, {
-            title: "Best Project Award",
-            issuer: "KLE Technological University",
-            date: "2023",
-            description: "Recognition for outstanding project in robotics and automation",
-            icon: "award"
-          }, {
-            title: "ROS 2 Development",
-            issuer: "The Construct",
-            date: "2023",
-            description: "Professional certification in ROS 2 development and implementation",
-            icon: "badge-check"
-          }, {
-            title: "Technical Excellence",
-            issuer: "VEGAM Solutions",
-            date: "2023",
-            description: "Recognition for technical contributions and innovative solutions",
-            icon: "star"
-          }].map((achievement, index) => (
-                <motion.div key={index} variants={fadeInUp} transition={{
-                  duration: 0.8
-                }}>
-                  <Card className="p-6 h-full glass hover:bg-white/5 transition-colors duration-300">
-                    <div className="flex items-start gap-4">
-                      <div className="p-2 glass rounded-lg">
-                        {achievement.icon === "trophy" && <Trophy className="w-6 h-6" />}
-                        {achievement.icon === "award" && <Award className="w-6 h-6" />}
-                        {achievement.icon === "badge-check" && <BadgeCheck className="w-6 h-6" />}
-                        {achievement.icon === "star" && <Star className="w-6 h-6" />}
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold mb-1">{achievement.title}</h3>
-                        <p className="text-sm text-muted-foreground mb-2">{achievement.issuer} • {achievement.date}</p>
-                        <p className="text-muted-foreground text-sm">{achievement.description}</p>
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="py-20 neo-blur">
-        <div className="container px-4 mx-auto">
-          <motion.div initial="initial" whileInView="animate" viewport={{
-          once: true
-        }} variants={fadeInUp} className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-gradient">Featured Projects</h2>
-            <p className="text-muted-foreground">
-              Explore my innovative work in robotics and automation
-            </p>
-          </motion.div>
-
-          <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8" variants={staggerContainer} initial="initial" whileInView="animate" viewport={{
-          once: true
-        }}>
-            {projects.map((project, index) => (
-              <motion.div key={index} variants={cardVariants} initial="initial" whileInView="animate" whileHover="hover" viewport={{
-                once: true
-              }} className="relative h-full">
-                <motion.div className="absolute inset-0 rounded-lg opacity-30" variants={backgroundVariants} initial="initial" animate="animate" />
-                <Card className="relative overflow-hidden glass hover:bg-white/5 transition-colors duration-300 cursor-pointer backdrop-blur-sm h-full" onClick={() => setSelectedProject(index)}>
-                  <motion.div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/50 to-primary" animate={{
-                    scale: [1, 1.5, 1],
-                    opacity: [0.3, 0.5, 0.3]
-                  }} transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }} />
-                  <div className="p-6 relative z-10">
-                    <motion.div initial={{
-                      opacity: 0,
-                      y: 20
-                    }} animate={{
-                      opacity: 1,
-                      y: 0
-                    }} transition={{
-                      delay: 0.2
-                    }}>
-                      <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                      <p className="text-muted-foreground mb-4">{project.brief}</p>
-                      <Button variant="outline" className="mt-4 relative overflow-hidden group">
-                        <span className="relative z-10">View Details</span>
-                        <motion.div className="absolute inset-0 bg-primary/10" initial={{
-                          x: "-100%"
-                        }} whileHover={{
-                          x: "100%"
-                        }} transition={{
-                          duration: 0.5
-                        }} />
-                        <ExternalLink className="ml-2 w-4 h-4 relative z-10" />
-                      </Button>
-                    </motion.div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <Dialog open={selectedProject !== null} onOpenChange={() => setSelectedProject(null)}>
-            {selectedProject !== null && (
-              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-                <DialogHeader>
-                  <DialogTitle className="text-2xl font-bold mb-4">
-                    {projects[selectedProject].title}
-                  </DialogTitle>
-                </DialogHeader>
-                <div className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4">
-                    {projects[selectedProject].images.map((image, idx) => (
-                      <motion.div key={idx} initial={{
-                        opacity: 0,
-                        y: 20
-                      }} animate={{
-                        opacity: 1,
-                        y: 0
-                      }} transition={{
-                        delay: idx * 0.2
-                      }} className="relative aspect-video rounded-lg overflow-hidden glass">
-                        <img src={image} alt={`Project image ${idx + 1}`} className="object-cover w-full h-full" />
-                      </motion.div>
-                    ))}
-                  </div>
-                  
-                  <motion.div initial={{
-                    opacity: 0,
-                    y: 20
-                  }} animate={{
-                    opacity: 1,
-                    y: 0
-                  }} className="space-y-4">
-                    <DialogDescription className="text-lg leading-relaxed">
-                      {projects[selectedProject].fullDescription}
-                    </DialogDescription>
-                    
-                    <div className="mt-6">
-                      <h4 className="text-lg font-semibold mb-2">Tools & Technologies</h4>
-                      <p className="text-muted-foreground">
-                        {projects[selectedProject].tools}
-                      </p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-4 mt-6">
-                      {projects[selectedProject].links.map((link, idx) => (
-                        <Button key={idx} variant="outline" className="glass hover:bg-white/10" onClick={() => window.open(link.url, "_blank")}>
-                          {link.title}
-                          <ExternalLink className="ml-2 w-4 h-4" />
-                        </Button>
-                      ))}
-                    </div>
-                  </motion.div>
-                </div>
-              </DialogContent>
-            )}
-          </Dialog>
-        </div>
-      </section>
-
-      <section className="py-20 neo-blur">
-        <div className="container px-4 mx-auto">
-          <motion.div initial="initial" whileInView="animate" viewport={{
-          once: true
-        }} variants={fadeInUp} className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="text-3xl font-bold mb-4 text-gradient">Industry Collaborations</h2>
             <p className="text-muted-foreground">
               Partnerships and projects with leading industry organizations
             </p>
           </motion.div>
 
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-8" 
-            variants={staggerContainer} 
-            initial="initial" 
-            whileInView="animate" 
-            viewport={{ once: true }}
-          >
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8" variants={staggerContainer}>
             {collaborationProjects.map((project, index) => (
               <motion.div 
                 key={index} 
@@ -751,13 +565,185 @@ const Index = () => {
 
       <section className="py-20 neo-blur">
         <div className="container px-4 mx-auto">
-          <motion.div 
-            initial="initial" 
-            whileInView="animate" 
-            viewport={{ once: true }} 
-            variants={fadeInUp} 
-            className="max-w-3xl mx-auto text-center mb-16"
-          >
+          <motion.div initial="initial" whileInView="animate" viewport={{
+          once: true
+        }} variants={fadeInUp} className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4 text-gradient">Achievements & Certifications</h2>
+            <p className="text-muted-foreground">
+              Recognition and accomplishments in robotics and automation
+            </p>
+          </motion.div>
+
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto" variants={staggerContainer}>
+            {[{
+            title: "Robotics & Industry 4.0",
+            issuer: "Coursera",
+            date: "2023",
+            description: "Advanced certification in modern robotics and Industry 4.0 technologies",
+            icon: "trophy"
+          }, {
+            title: "Best Project Award",
+            issuer: "KLE Technological University",
+            date: "2023",
+            description: "Recognition for outstanding project in robotics and automation",
+            icon: "award"
+          }, {
+            title: "ROS 2 Development",
+            issuer: "The Construct",
+            date: "2023",
+            description: "Professional certification in ROS 2 development and implementation",
+            icon: "badge-check"
+          }, {
+            title: "Technical Excellence",
+            issuer: "VEGAM Solutions",
+            date: "2023",
+            description: "Recognition for technical contributions and innovative solutions",
+            icon: "star"
+          }].map((achievement, index) => (
+                <motion.div key={index} variants={fadeInUp} transition={{
+                  duration: 0.8
+                }}>
+                  <Card className="p-6 h-full glass hover:bg-white/5 transition-colors duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="p-2 glass rounded-lg">
+                        {achievement.icon === "trophy" && <Trophy className="w-6 h-6" />}
+                        {achievement.icon === "award" && <Award className="w-6 h-6" />}
+                        {achievement.icon === "badge-check" && <BadgeCheck className="w-6 h-6" />}
+                        {achievement.icon === "star" && <Star className="w-6 h-6" />}
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold mb-1">{achievement.title}</h3>
+                        <p className="text-sm text-muted-foreground mb-2">{achievement.issuer} • {achievement.date}</p>
+                        <p className="text-muted-foreground text-sm">{achievement.description}</p>
+                      </div>
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-20 neo-blur">
+        <div className="container px-4 mx-auto">
+          <motion.div initial="initial" whileInView="animate" viewport={{
+          once: true
+        }} variants={fadeInUp} className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4 text-gradient">Featured Projects</h2>
+            <p className="text-muted-foreground">
+              Explore my innovative work in robotics and automation
+            </p>
+          </motion.div>
+
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8" variants={staggerContainer}>
+            {projects.map((project, index) => (
+              <motion.div key={index} variants={cardVariants} initial="initial" whileInView="animate" whileHover="hover" viewport={{
+                once: true
+              }} className="relative h-full">
+                <motion.div className="absolute inset-0 rounded-lg opacity-30" variants={backgroundVariants} initial="initial" animate="animate" />
+                <Card className="relative overflow-hidden glass hover:bg-white/5 transition-colors duration-300 cursor-pointer backdrop-blur-sm h-full" onClick={() => setSelectedProject(index)}>
+                  <motion.div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/50 to-primary" animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.3, 0.5, 0.3]
+                  }} transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }} />
+                  <div className="p-6 relative z-10">
+                    <motion.div initial={{
+                      opacity: 0,
+                      y: 20
+                    }} animate={{
+                      opacity: 1,
+                      y: 0
+                    }} transition={{
+                      delay: 0.2
+                    }}>
+                      <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                      <p className="text-muted-foreground mb-4">{project.brief}</p>
+                      <Button variant="outline" className="mt-4 relative overflow-hidden group">
+                        <span className="relative z-10">View Details</span>
+                        <motion.div className="absolute inset-0 bg-primary/10" initial={{
+                          x: "-100%"
+                        }} whileHover={{
+                          x: "100%"
+                        }} transition={{
+                          duration: 0.5
+                        }} />
+                        <ExternalLink className="ml-2 w-4 h-4 relative z-10" />
+                      </Button>
+                    </motion.div>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <Dialog open={selectedProject !== null} onOpenChange={() => setSelectedProject(null)}>
+            {selectedProject !== null && (
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-bold mb-4">
+                    {projects[selectedProject].title}
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="space-y-6">
+                  <div className="grid grid-cols-2 gap-4">
+                    {projects[selectedProject].images.map((image, idx) => (
+                      <motion.div key={idx} initial={{
+                        opacity: 0,
+                        y: 20
+                      }} animate={{
+                        opacity: 1,
+                        y: 0
+                      }} transition={{
+                        delay: idx * 0.2
+                      }} className="relative aspect-video rounded-lg overflow-hidden glass">
+                        <img src={image} alt={`Project image ${idx + 1}`} className="object-cover w-full h-full" />
+                      </motion.div>
+                    ))}
+                  </div>
+                  
+                  <motion.div initial={{
+                    opacity: 0,
+                    y: 20
+                  }} animate={{
+                    opacity: 1,
+                    y: 0
+                  }} className="space-y-4">
+                    <DialogDescription className="text-lg leading-relaxed">
+                      {projects[selectedProject].fullDescription}
+                    </DialogDescription>
+                    
+                    <div className="mt-6">
+                      <h4 className="text-lg font-semibold mb-2">Tools & Technologies</h4>
+                      <p className="text-muted-foreground">
+                        {projects[selectedProject].tools}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-4 mt-6">
+                      {projects[selectedProject].links.map((link, idx) => (
+                        <Button key={idx} variant="outline" className="glass hover:bg-white/10" onClick={() => window.open(link.url, "_blank")}>
+                          {link.title}
+                          <ExternalLink className="ml-2 w-4 h-4" />
+                        </Button>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              </DialogContent>
+            )}
+          </Dialog>
+        </div>
+      </section>
+
+      <section className="py-20 neo-blur">
+        <div className="container px-4 mx-auto">
+          <motion.div initial="initial" whileInView="animate" viewport={{
+          once: true
+        }} variants={fadeInUp} className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="text-3xl font-bold mb-4 text-gradient">Software & Tools</h2>
             <p className="text-muted-foreground">
               Proficient in industry-standard software and development tools
@@ -810,6 +796,47 @@ const Index = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-20">
+        <div className="container px-4 mx-auto">
+          <motion.div initial="initial" whileInView="animate" viewport={{
+          once: true
+        }} variants={fadeInUp} className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4 text-gradient">Get in Touch</h2>
+            <p className="text-muted-foreground mb-8">
+              Let's discuss how we can work together
+            </p>
+            <div className="flex justify-center gap-4">
+              <Button 
+                onClick={handleContactClick}
+                className="rounded-full glass hover:bg-white/10 transition-colors duration-300"
+                size="lg"
+              >
+                <Mail className="w-5 h-5 mr-2" />
+                Email Me
+              </Button>
+              <Button
+                variant="outline"
+                className="rounded-full glass hover:bg-white/10 transition-colors duration-300"
+                size="lg"
+                onClick={() => window.open("https://linkedin.com/in/your-profile", "_blank")}
+              >
+                <Linkedin className="w-5 h-5 mr-2" />
+                LinkedIn
+              </Button>
+              <Button
+                variant="outline"
+                className="rounded-full glass hover:bg-white/10 transition-colors duration-300"
+                size="lg"
+                onClick={() => window.open("https://github.com/0RBalaji", "_blank")}
+              >
+                <Github className="w-5 h-5 mr-2" />
+                GitHub
+              </Button>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>
