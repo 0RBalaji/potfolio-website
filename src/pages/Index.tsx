@@ -1,4 +1,3 @@
-<lov-code>
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -20,7 +19,6 @@ import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
-  const [selectedCollaboration, setSelectedCollaboration] = useState<number | null>(null);
   const { toast } = useToast();
 
   const handleContactClick = () => {
@@ -161,7 +159,7 @@ const Index = () => {
         { name: "PLC", icon: <Play className="w-4 h-4 mr-2" />, image: "/plc.png" },
         { name: "Industrial", icon: <Factory className="w-4 h-4 mr-2" />, image: "/industrial.png" },
         { name: "SCADA", icon: <SlidersHorizontal className="w-4 h-4 mr-2" />, image: "/scada.png" },
-        { name: "Industry 4.0", icon: <Network className="w-4 h-4 mr-2" />, image: "/industry40.png" },
+        { name: "Industry 4.0", icon: <Network className="w-4 h-4 mr-4" />, image: "/industry40.png" },
         { name: "IoT", icon: <Wifi className="w-4 h-4 mr-2" />, image: "/iot.png" },
         { name: "Process Control", icon: <Timer className="w-4 h-4 mr-2" />, image: "/process-control.png" }
       ],
@@ -624,13 +622,9 @@ const Index = () => {
 
       <section className="py-20 neo-blur">
         <div className="container px-4 mx-auto">
-          <motion.div 
-            initial="initial" 
-            whileInView="animate" 
-            viewport={{ once: true }} 
-            variants={fadeInUp} 
-            className="max-w-3xl mx-auto text-center mb-16"
-          >
+          <motion.div initial="initial" whileInView="animate" viewport={{
+          once: true
+        }} variants={fadeInUp} className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="text-3xl font-bold mb-4 text-gradient">Industry Collaborations</h2>
             <p className="text-muted-foreground">
               Partnerships and projects with leading industry organizations
@@ -647,4 +641,179 @@ const Index = () => {
             {collaborationProjects.map((project, index) => (
               <motion.div 
                 key={index} 
-                
+                variants={cardVariants} 
+                initial="initial" 
+                whileInView="animate" 
+                whileHover="hover" 
+                viewport={{
+                  once: true
+                }} 
+                className="relative h-full"
+              >
+                <motion.div className="absolute inset-0 rounded-lg opacity-30" variants={backgroundVariants} initial="initial" animate="animate" />
+                <Card className="relative overflow-hidden glass hover:bg-white/5 transition-colors duration-300 cursor-pointer backdrop-blur-sm h-full" onClick={() => setSelectedProject(index)}>
+                  <motion.div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/50 to-primary" animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.3, 0.5, 0.3]
+                  }} transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }} />
+                  <div className="p-6 relative z-10">
+                    <motion.div initial={{
+                      opacity: 0,
+                      y: 20
+                    }} animate={{
+                      opacity: 1,
+                      y: 0
+                    }} transition={{
+                      delay: 0.2
+                    }}>
+                      <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                      <p className="text-muted-foreground mb-4">{project.brief}</p>
+                      <Button variant="outline" className="mt-4 relative overflow-hidden group">
+                        <span className="relative z-10">View Details</span>
+                        <motion.div className="absolute inset-0 bg-primary/10" initial={{
+                          x: "-100%"
+                        }} whileHover={{
+                          x: "100%"
+                        }} transition={{
+                          duration: 0.5
+                        }} />
+                        <ExternalLink className="ml-2 w-4 h-4 relative z-10" />
+                      </Button>
+                    </motion.div>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <Dialog open={selectedProject !== null} onOpenChange={() => setSelectedProject(null)}>
+            {selectedProject !== null && (
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-bold mb-4">
+                    {projects[selectedProject].title}
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="space-y-6">
+                  <div className="grid grid-cols-2 gap-4">
+                    {projects[selectedProject].images.map((image, idx) => (
+                      <motion.div key={idx} initial={{
+                        opacity: 0,
+                        y: 20
+                      }} animate={{
+                        opacity: 1,
+                        y: 0
+                      }} transition={{
+                        delay: idx * 0.2
+                      }} className="relative aspect-video rounded-lg overflow-hidden glass">
+                        <img src={image} alt={`Project image ${idx + 1}`} className="object-cover w-full h-full" />
+                      </motion.div>
+                    ))}
+                  </div>
+                  
+                  <motion.div initial={{
+                    opacity: 0,
+                    y: 20
+                  }} animate={{
+                    opacity: 1,
+                    y: 0
+                  }} className="space-y-4">
+                    <DialogDescription className="text-lg leading-relaxed">
+                      {projects[selectedProject].fullDescription}
+                    </DialogDescription>
+                    
+                    <div className="mt-6">
+                      <h4 className="text-lg font-semibold mb-2">Tools & Technologies</h4>
+                      <p className="text-muted-foreground">
+                        {projects[selectedProject].tools}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-4 mt-6">
+                      {projects[selectedProject].links.map((link, idx) => (
+                        <Button key={idx} variant="outline" className="glass hover:bg-white/10" onClick={() => window.open(link.url, "_blank")}>
+                          {link.title}
+                          <ExternalLink className="ml-2 w-4 h-4" />
+                        </Button>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              </DialogContent>
+            )}
+          </Dialog>
+        </div>
+      </section>
+
+      <section className="py-20 neo-blur">
+        <div className="container px-4 mx-auto">
+          <motion.div 
+            initial="initial" 
+            whileInView="animate" 
+            viewport={{ once: true }} 
+            variants={fadeInUp} 
+            className="max-w-3xl mx-auto text-center mb-16"
+          >
+            <h2 className="text-3xl font-bold mb-4 text-gradient">Software & Tools</h2>
+            <p className="text-muted-foreground">
+              Proficient in industry-standard software and development tools
+            </p>
+          </motion.div>
+
+          <div className="space-y-12">
+            {softwareTools.map((section, sectionIndex) => (
+              <motion.div
+                key={sectionIndex}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true }}
+                variants={fadeInUp}
+                className="space-y-6"
+              >
+                <div className="flex items-center gap-3">
+                  <Tools className="w-6 h-6 text-primary" />
+                  <h3 className="text-xl font-semibold text-gradient">{section.category}</h3>
+                </div>
+                <motion.div 
+                  className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6"
+                  variants={{
+                    animate: {
+                      transition: {
+                        staggerChildren: 0.1
+                      }
+                    }
+                  }}
+                >
+                  {section.tools.map((tool, toolIndex) => (
+                    <motion.div
+                      key={toolIndex}
+                      variants={{
+                        initial: { opacity: 0, y: 20 },
+                        animate: { opacity: 1, y: 0 }
+                      }}
+                      whileHover={{ scale: 1.05 }}
+                      className="glass p-4 rounded-xl flex flex-col items-center justify-center aspect-square hover:bg-white/10 transition-colors duration-300"
+                    >
+                      <img
+                        src={tool.image}
+                        alt={tool.name}
+                        className="w-12 h-12 object-contain mb-2"
+                        title={tool.name}
+                      />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Index;
