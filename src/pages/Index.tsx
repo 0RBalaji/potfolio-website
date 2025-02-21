@@ -20,11 +20,11 @@ import { IntroSection } from "@/components/sections/IntroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { ProjectDialog } from "@/components/sections/ProjectDialog";
+import { TechnicalSkillsSection } from "@/components/sections/TechnicalSkillsSection";
+import { SoftwareToolsSection } from "@/components/sections/SoftwareToolsSection";
 import { IndustryCollaborationsSection } from "@/components/sections/IndustryCollaborationsSection";
 import { AchievementsSection } from "@/components/sections/AchievementsSection";
 import { FeaturedProjectsSection } from "@/components/sections/FeaturedProjectsSection";
-import { TechnicalSkillsSection } from "@/components/sections/TechnicalSkillsSection";
-import { SoftwareToolsSection } from "@/components/sections/SoftwareToolsSection";
 
 const Index = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
