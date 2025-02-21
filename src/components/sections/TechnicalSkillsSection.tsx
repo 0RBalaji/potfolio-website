@@ -42,26 +42,27 @@ export const TechnicalSkillsSection = ({
         >
           {skillCategories.map((category, index) => (
             <motion.div key={index} variants={fadeInUp}>
-              <Card
-                className="p-6 h-full neo-blur hover:bg-white/5 transition-colors duration-300"
+              <motion.div
                 variants={cardVariants}
                 initial="initial"
                 whileHover="hover"
                 animate="animate"
               >
-                <div className="flex items-center gap-4 mb-6">
-                  {category.icon}
-                  <h3 className="text-xl font-semibold">{category.title}</h3>
-                </div>
-                <div className="space-y-4">
-                  {category.skills.map((skill: any, idx: number) => (
-                    <div key={idx} className="flex items-center">
-                      {skill.icon}
-                      <span>{skill.name}</span>
-                    </div>
-                  ))}
-                </div>
-              </Card>
+                <Card className="p-6 h-full neo-blur hover:bg-white/5 transition-colors duration-300">
+                  <div className="flex items-center gap-4 mb-6">
+                    {category.icon}
+                    <h3 className="text-xl font-semibold">{category.title}</h3>
+                  </div>
+                  <div className="space-y-4">
+                    {category.skills.map((skill: any, idx: number) => (
+                      <div key={idx} className="flex items-center">
+                        {skill.icon}
+                        <span>{skill.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>
