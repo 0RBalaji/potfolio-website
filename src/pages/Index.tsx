@@ -567,7 +567,7 @@ const Index = () => {
             <p className="text-muted-foreground">
               Recognition and accomplishments in robotics and automation
             </p>
-          </motion.div>
+          </div>
 
           <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto" variants={staggerContainer}>
             {[{
@@ -628,10 +628,113 @@ const Index = () => {
             <p className="text-muted-foreground">
               Explore my innovative work in robotics and automation
             </p>
-          </motion.div>
+          </div>
 
           <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8" variants={staggerContainer}>
             {projects.map((project, index) => (
               <motion.div key={index} variants={cardVariants} initial="initial" whileInView="animate" whileHover="hover" viewport={{
                 once: true
               }} className="relative h-full">
+                <motion.div className="absolute inset-0 rounded-lg opacity-30" variants={backgroundVariants} initial="initial" animate="animate" />
+                <Card className="relative overflow-hidden glass hover:bg-white/5 transition-colors duration-300 cursor-pointer backdrop-blur-sm h-full" onClick={() => setSelectedProject(index)}>
+                  <motion.div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/50 to-primary" animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.3, 0.5, 0.3]
+                  }} transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatType: "reverse"
+                  }} />
+                  <div className="p-6 relative z-10">
+                    <motion.div initial={{
+                      opacity: 0,
+                      y: 20
+                    }} animate={{
+                      opacity: 1,
+                      y: 0
+                    }} transition={{
+                      delay: 0.2
+                    }}>
+                      <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                      <p className="text-muted-foreground mb-4">{project.brief}</p>
+                      <Button variant="outline" className="mt-4 relative overflow-hidden group">
+                        <span className="relative z-10">View Details</span>
+                        <motion.div className="absolute inset-0 bg-primary/10" initial={{
+                          x: "-100%"
+                        }} whileHover={{
+                          x: "100%"
+                        }} transition={{
+                          duration: 0.5
+                        }} />
+                        <ExternalLink className="ml-2 w-4 h-4 relative z-10" />
+                      </Button>
+                    </motion.div>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <Dialog open={selectedProject !== null} onOpenChange={() => setSelectedProject(null)}>
+            {selectedProject !== null && (
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-bold mb-4">
+                    {projects[selectedProject].title}
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="space-y-6">
+                  <div className="grid grid-cols-2 gap-4">
+                    {projects[selectedProject].images.map((image, idx) => (
+                      <motion.div key={idx} initial={{
+                        opacity: 0,
+                        y: 20
+                      }} animate={{
+                        opacity: 1,
+                        y: 0
+                      }} transition={{
+                        delay: idx * 0.2
+                      }} className="relative aspect-video rounded-lg overflow-hidden glass">
+                        <img src={image} alt={`Project image ${idx + 1}`} className="object-cover w-full h-full" />
+                      </motion.div>
+                    ))}
+                  </div>
+                  
+                  <motion.div initial={{
+                    opacity: 0,
+                    y: 20
+                  }} animate={{
+                    opacity: 1,
+                    y: 0
+                  }} className="space-y-4">
+                    <DialogDescription className="text-lg leading-relaxed">
+                      {projects[selectedProject].fullDescription}
+                    </DialogDescription>
+                    
+                    <div className="mt-6">
+                      <h4 className="text-lg font-semibold mb-2">Tools & Technologies</h4>
+                      <p className="text-muted-foreground">
+                        {projects[selectedProject].tools}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-4 mt-6">
+                      {projects[selectedProject].links.map((link, idx) => (
+                        <Button key={idx} variant="outline" className="glass hover:bg-white/10" onClick={() => window.open(link.url, "_blank")}>
+                          {link.title}
+                          <ExternalLink className="ml-2 w-4 h-4" />
+                        </Button>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              </DialogContent>
+            )}
+          </Dialog>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Index;
